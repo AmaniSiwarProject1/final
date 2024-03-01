@@ -1,31 +1,37 @@
 package Wedding.Planner;
 
-public class Users{
-	 
-	 private String fullname;
-	    private String password;
-	    private String email;
+public class Users {
+    private String fullName;
+    private String email;
+    private String password;
 
-	    public Users(String email,String fullname, String password) {
-	        this.fullname = fullname;
-	        this.password = password;
-	        this.email=email;
+    public Users(String fullName, String email, String password) {
+        this.fullName = fullName;
+        this.email = email;
+        this.password = password;
+    }
 
-} public String getEmail() {
-   return email;
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
-public void setEmail(String email) {
-   this.email = email;
-}
-public String getpassword() {
-   return password;
-}
-public void setPassword(String password) {
-   this.password = password;
-}
-public String getfullname() {
-   return fullname;
-}
-public void setusername(String rul) {
-   this.fullname = fullname;
-}}

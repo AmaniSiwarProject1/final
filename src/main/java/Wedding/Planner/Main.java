@@ -1,20 +1,25 @@
 package Wedding.Planner;
 
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
-	static String EMAIL1;
-	private static String userType = "none" ;
-	public static ArrayList <Users> UsersList= new ArrayList<Users>();
-	public static ArrayList <Admin> AdminList= new ArrayList<Admin>();
-	public static ArrayList <ServiceProvider> ServiceProviderList= new ArrayList<ServiceProvider>();
-	public static void setUserType(String type) {
-		userType = type;
-	}
-	public static String getUserType() {
-		return userType;
-	}
+    static String EMAIL1;
+    private static final String EMAIL = "Enter your Email please";
+    private static final String PASS = "Enter your password please";
+    private static String userType = "none";
+    public static ArrayList<Users> UsersList = new ArrayList<>();
+    public static ArrayList<Admin> AdminList = new ArrayList<>();
+    public static ArrayList<ServiceProvider> ServiceProviderList = new ArrayList<>();
+
+    public static void setUserType(String type) {
+        userType = type;
+    }
+
+    public static String getUserType() {
+        return userType;
+    }
+
     static Scanner input2 = new Scanner(System.in);
 
     public static Users fullInformationToSignUp() {
@@ -24,107 +29,136 @@ public class Main {
         String Email = input2.next();
         System.out.println("Enter Your password:");
         String password = input2.next();
-        return  new Users(fullName, Email, password);
+        return new Users(fullName, Email, password);
     }
-    public static boolean showMenu(String type )  {
-    	boolean flag=false;
-    	if (type.equals("User"))
-    	{flag= true; showMenuForUser();}
-    	else     	if (type.equals("Admin"))
-    	{flag= true;showMenuForAd();}
-    	
-    	else if (type.equals("Provider")) {flag= true;showMenuForSp();}
-    	else 	{flag= true; showMenuForNone();}
 
-return flag;
-	
-    	
+    public static boolean showMenu(String type) {
+        boolean flag = false;
+        if (type.equals("User")) {
+            flag = true;
+            showMenuForUser();
+        } else if (type.equals("Admin")) {
+            flag = true;
+            showMenuForAd();
+        } else if (type.equals("Provider")) {
+            flag = true;
+            showMenuForSp();
+        } else {
+            flag = true;
+            showMenuForNone();
+        }
+        return flag;
     }
+
     private static void showMenuForNone() {
-		// TODO Auto-generated method stub
-		
-	}
-	private static void showMenuForSp() {
-		// TODO Auto-generated method stub
-		
-	}
-	private static void showMenuForAd() {
-		// TODO Auto-generated method stub
-		
-	}
-	private static void showMenuForUser() {
-		// TODO Auto-generated method stub
-	}
-public static String login(String Email , String passWord) {
-    	
-    	
-	Users UserNumber1 = new Users("AYAAWWAD","ayahazeem3@gmail.com","123");
-	Users UserNumber2 = new Users("LARA","lara@example.com","456");
-	Users UserNumber3 = new Users("batool","batool@example.com","789");
-	Users UserNumber4 = new Users("2","2","2");
-	UsersList.add(UserNumber1);
-	UsersList.add(UserNumber2);
-	UsersList.add(UserNumber3);
-	UsersList.add(UserNumber4);
-
-	    Admin AdminNumber1= new Admin("Bayan","Bayan@example.com","1122");
-    	AdminList.add(AdminNumber1);
-    	Admin AdminNumber11 = new Admin("1","1","1");
-    	AdminList.add(AdminNumber11);
-
-
-    	ServiceProvider serviceproviderNumber1 = new ServiceProvider("Marwa","s12043062@stu.najah.edu","3344","0599689793");
-    	ServiceProviderList.add(serviceproviderNumber1);
-    	ServiceProvider serviceproviderNumber2 = new ServiceProvider("3","3","3","3");
-    	ServiceProviderList.add(serviceproviderNumber2);
-
-    	
-    	
-    	
-for (Users user : UsersList) {
-			
-			if ((user.getEmail() .equals(Email))&&(user.getpassword().equals(passWord))) {
-				
-					setUserType("User");
-				}
-			
-					
-			}
-
-for (Admin Admin : AdminList) {
-	
-	if ((Admin.getEmail() .equals(Email))&&(Admin.getpassword().equals(passWord))) {
-		
-			setUserType("Admin");
-		}
-	
-			
-	}
-for (ServiceProvider provider:  ServiceProviderList) {
-	
-	if ((provider.getEmail() .equals(Email))&&(provider.getpassword().equals(passWord))) {
-		
-			setUserType("Provider");
-		}
-	
-			
-	}
-		return getUserType();  
-
+        System.out.println("You are not a user in this system!");
+        System.out.println("Please sign up as a new user or log in again");
+        System.out.println("1. Enter to Sign Up");
+        System.out.println("2. Enter to Log in");
+        int num = input2.nextInt();
+        if (num == 1) {
+            signUp(fullInformationToSignUp());
+            num = 2;
+        }
+        if (num == 2) {
+            System.out.println(EMAIL);
+            EMAIL1 = input2.next();
+            System.out.println(PASS);
+            String pass = input2.next();
+            if (login(EMAIL1, pass)) {
+                System.out.println("Login successful!");
+                showMenu(getUserType());
+            } else {
+                showMenuForNone(); 
+            }
+        }
     }
-public static boolean signup(Users U) {
-	
-	UsersList.add(U);
-	
-	System.out.println("done ! you are user please log in ");
-	
-	
 
-	return true;
-	
-}
-	
-	public static void main(String[] args)  {
+    private static void showMenuForSp() {
+        // TODO: Add menu for service provider
+    }
+
+    private static void showMenuForAd() {
+        // TODO: Add menu for admin
+    }
+
+    private static void showMenuForUser() {
+        System.out.println("------------------------------------------------");
+        System.out.println("1. View Profile");
+        System.out.println("2. Edit Profile");
+        System.out.println("3. Search for Services");
+        System.out.println("4. Book a Service");
+        System.out.println("5. View My Bookings");
+        System.out.println("6. Log out");
+        System.out.println("------------------------------------------------");
+
+        int num = input2.nextInt();
+        switch (num) {
+            case 1:
+                // TODO: View Profile
+                break;
+            case 2:
+                // TODO: Edit Profile
+                break;
+            case 3:
+                // TODO: Search for Services
+                break;
+            case 4:
+                // TODO: Book a Service
+                break;
+            case 5:
+                // TODO: View My Bookings
+                break;
+            case 6:
+                // TODO: Log out
+                break;
+            default:
+                System.out.println("Invalid input. Please choose a number between 1 and 6.");
+                break;
+        }
+    }
+
+    public static boolean login(String email, String password) {
+        for (Users user : UsersList) {
+            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
+                setUserType("User");
+                return true;
+            }
+        }
+
+        for (Admin admin : AdminList) {
+            if (admin.getEmail().equals(email) && admin.getPassword().equals(password)) {
+                setUserType("Admin");
+                return true;
+            }
+        }
+
+        for (ServiceProvider provider : ServiceProviderList) {
+            if (provider.getEmail().equals(email) && provider.getPassword().equals(password)) {
+                setUserType("Provider");
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean signUp(Users user) {
+        UsersList.add(user);
+        System.out.println("Done! You are now registered. Please log in.");
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Users user1 = new Users("John Doe", "johndoe1@example.com", "password123");
+        UsersList.add(user1);
+
+        Admin admin1 = new Admin("Jane Doe", "janedoe@example.com", "password456");
+        AdminList.add(admin1);
+
+        ServiceProvider provider1 = new ServiceProvider("Bob Smith", "bobsmith@example.com", "password789", "Photography");
+        ServiceProviderList.add(provider1);
+
         System.out.println("------------------------------------------------");
         System.out.println("1. Sign Up");
         System.out.println("2. Log in");
@@ -134,25 +168,20 @@ public static boolean signup(Users U) {
         int num = input2.nextInt();
         if (num == 1) {
             signUp(fullInformationToSignUp());
-        }
-        else if (num == 2) {
-            System.out.print("Enter your email: ");
-            String email = input2.next();
-            System.out.print("Enter your password: ");
+        } else if (num == 2) {
+            System.out.print(EMAIL);
+            EMAIL1 = input2.next();
+            System.out.print(PASS);
             String pass = input2.next();
-            logIn(email, pass);
-        }
-        else if (num == 3) {
+            if (login(EMAIL1, pass)) {
+                System.out.println("Login successful!");
+                showMenu(getUserType());
+            } else {
+                showMenuForNone();
+            }
+        } else if (num == 3) {
             System.out.println("Thanks for visiting the program.");
             System.exit(0);
         }
-    }
-
-    public static void signUp(Users user) {
-        System.out.println("User signed up successfully!");
-    }
-
-    public static void logIn(String email, String password) {
-        System.out.println("User logged in successfully!");
     }
 }
