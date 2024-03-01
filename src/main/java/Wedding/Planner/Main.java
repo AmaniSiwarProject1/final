@@ -65,9 +65,10 @@ public class Main {
             EMAIL1 = input2.next();
             System.out.println(PASS);
             String pass = input2.next();
-            if (login(EMAIL1, pass)) {
+            String userType = login(EMAIL1, pass);
+            if (!userType.equals("None")) {
                 System.out.println("Login successful!");
-                showMenu(getUserType());
+                showMenu(userType);
             } else {
                 showMenuForNone(); 
             }
@@ -118,29 +119,29 @@ public class Main {
         }
     }
 
-    public static boolean login(String email, String password) {
+    public static String login(String email, String password) {
         for (Users user : UsersList) {
             if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
                 setUserType("User");
-                return true;
+                return "User";
             }
         }
 
         for (Admin admin : AdminList) {
             if (admin.getEmail().equals(email) && admin.getPassword().equals(password)) {
                 setUserType("Admin");
-                return true;
+                return "Admin";
             }
         }
 
         for (ServiceProvider provider : ServiceProviderList) {
             if (provider.getEmail().equals(email) && provider.getPassword().equals(password)) {
                 setUserType("Provider");
-                return true;
+                return "Provider";
             }
         }
 
-        return false;
+        return "None";
     }
 
     public static boolean signUp(Users user) {
@@ -150,13 +151,13 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Users user1 = new Users("John Doe", "johndoe1@example.com", "password123");
+        Users user1 = new Users("John Doe", "a@gmail.com", "password123");
         UsersList.add(user1);
 
-        Admin admin1 = new Admin("Jane Doe", "janedoe@example.com", "password456");
+        Admin admin1 = new Admin("Jane Doe", "si@example.com", "password456");
         AdminList.add(admin1);
 
-        ServiceProvider provider1 = new ServiceProvider("Bob Smith", "bobsmith@example.com", "password789", "Photography");
+        ServiceProvider provider1 = new ServiceProvider("Bob Smith", "siam@example.com", "password789", "Photography");
         ServiceProviderList.add(provider1);
 
         System.out.println("------------------------------------------------");
@@ -173,9 +174,10 @@ public class Main {
             EMAIL1 = input2.next();
             System.out.print(PASS);
             String pass = input2.next();
-            if (login(EMAIL1, pass)) {
+            String userType = login(EMAIL1, pass);
+            if (!userType.equals("None")) {
                 System.out.println("Login successful!");
-                showMenu(getUserType());
+                showMenu(userType);
             } else {
                 showMenuForNone();
             }
