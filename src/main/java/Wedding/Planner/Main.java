@@ -207,6 +207,7 @@ public class Main {
         newEventsList.add(new AddEvent("Bride2", "Groom2", "2024-06-15", "11:30 AM", 150, "Venue2", "Location2", "Phone2"));
         newEventsList.add(new AddEvent("Bride3", "Groom3", "2024-07-10", "02:00 PM", 200, "Venue3", "Location3", "Phone3"));
 
+        
         eventManager.addMultipleEvents(newEventsList);
 
         System.out.println("------------------------------------------------");

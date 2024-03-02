@@ -1,21 +1,19 @@
 Feature: AddEvent
 
-Scenario: Add Event successfully
-Given that the User is logged in
-And there is an Event with brideName "Bride1", groomName "ali",date "2024-5-23",time  "10:00 AM", numberOfGuests 150 , venue "ahlam" ,location"nablus"and phone  "0599689793"
+Scenario: Add Event Successfully
+  Given the User is logged in
+  And there is no event with brideName "Bride1", groomName "Groom1", date "2024-05-20", time "10:00 AM", numberOfGuests "100", venue "Venue1", location "Location1", and phone "123456789"
+  When the User adds a new event with brideName "Bride1", groomName "Groom1", date "2024-05-20", time "10:00 AM", numberOfGuests "100", venue "Venue1", location "Location1", and phone "123456789"
+  Then the new event should be added successfully
 
-Then the Event will be saved in the newEventsList  
-
-
-Scenario: Add Event and no available  venue
-Given that the User is logged in
-And there is an Event with brideName "Bride1", groomName "Groom1",date "2024-05-20",time  "10:00 AM", numberOfGuests 100 , venue "Venue1" ,location"Location1"and phone  "Phone1"
-And the venue is allocated 
-Then that show an error message
-
-
-Scenario: add Event large number of guets
-Given that the User is logged in
-And there is an Event with brideName "Bride2", groomName "Groom2",date "2024-06-15",time  "11:30 AM", numberOfGuests 150 , venue "Venue2" ,location"Location2"and phone  "Phone2"
-And the numberOfGuests is larger
-Then the event will not be saves and error message will appear
+Scenario: Venue is Already Booked
+  Given the User is logged in
+  And there is an event with brideName "Bride5", groomName "Groom5", date "2024-05-20", time "10:00 AM", numberOfGuests "100", venue "Venue1", location "Location1", and phone "987654321"
+  When the User tries to add a new event with the same date, time, and venue
+  Then the system should not allow adding the event and display a message about the venue being already booked
+   
+   Scenario: Adding an event with more guests than the venue capacity
+  Given the User is logged in
+  And there is an event with brideName "Bride1", groomName "Groom1", date "2024-05-20", time "10:00 AM", numberOfGuests "200", venue "Venue3", location "Location1", and phone "123456789"
+  When the User tries to add a new event with brideName "Bride2", groomName "Groom2", date "2024-05-20", time "12:00 PM", numberOfGuests "250", venue "Venue3", location "Location2", and phone "987654321"
+  Then the system should not allow adding the event and display a message about the venue capacity being exceeded

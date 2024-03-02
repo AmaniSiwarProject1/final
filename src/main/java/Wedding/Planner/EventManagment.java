@@ -1,23 +1,55 @@
 package Wedding.Planner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class EventManagment {
-    public List<AddEvent> events;
-    private static Scanner input2 = new Scanner(System.in);
+    private String errorMessage;
+
+    private List<AddEvent> events;
+    private static Scanner input = new Scanner(System.in); // Use static to avoid creating multiple instances
 
     public EventManagment() {
         events = new ArrayList<>();
     }
-
+   
+    public String getErrorMessage() {
+        return errorMessage;
+    }
     public void addEvent(AddEvent event) {
-        events.add(event);
-        System.out.println("Event added successfully for: " + event.getBrideName() + " and " + event.getGroomName());
+        if (checkEventsExist(event.getBrideName(), event.getGroomName(), event.getDate(), event.getTime(), event.getNumberOfGuests(), event.getVenue(), event.getLocation(), event.getPhone())) {
+            System.out.println("Event already exists in the list.");
+        } else {
+            events.add(event);
+            System.out.println("Event added successfully for: " + event.getBrideName() + " and " + event.getGroomName());
+        }
     }
 
-    public void listAllEvents() {
+
+    public boolean checkEventsExist(String brideName, String groomName, String date, String time, int numberOfGuests,
+            String venue, String location, String phone) {
+        for (AddEvent existingEvent : events) {
+            // تحقق من تطابق كل المعلومات المعطاة مع الأحداث الموجودة في القائمة
+            if (existingEvent.getBrideName().equals(brideName) &&
+                existingEvent.getGroomName().equals(groomName) &&
+                existingEvent.getDate().equals(date) &&
+                existingEvent.getTime().equals(time) &&
+                existingEvent.getNumberOfGuests() == numberOfGuests &&
+                existingEvent.getVenue().equals(venue) &&
+                existingEvent.getLocation().equals(location) &&
+                existingEvent.getPhone().equals(phone)) {
+                return true; // الحدث موجود بالفعل
+            }
+        }
+        return false; // الحدث غير موجود
+    }
+
+
+
+	public void listAllEvents() {
         if (events.isEmpty()) {
             System.out.println("No events to display.");
         } else {
@@ -30,47 +62,83 @@ public class EventManagment {
         }
     }
 
-    public void createWeddingEvent(String brideName, String groomName, String date, String time, String numberOfGuests, String venue, String location, String phone) {
-        AddEvent weddingEvent = new AddEvent(brideName, groomName, date, time, Integer.parseInt(numberOfGuests), venue, location, phone);
-        addEvent(weddingEvent);
-    }
+	public void createWeddingEvent(String brideName, String groomName, String date, String time, int numberOfGuests, String venue, String location, String phone) {
+	    // تعريف وتعبئة الخريطة venueCapacities
+	    Map<String, Integer> venueCapacities = new HashMap<>();
+	    venueCapacities.put("Venue1", 100);
+	    venueCapacities.put("Venue2", 150);
+	    venueCapacities.put("Venue3", 200);
+
+	    // التحقق من القاعة محجوزة بالفعل
+	    for (AddEvent event : events) {
+	        String eventVenue = event.getVenue();
+	        if (eventVenue != null && eventVenue.equals(venue) && event.getDate().equals(date) && event.getTime().equals(time)) {
+	            errorMessage = "Venue is already booked for this time and date.";
+	            return;
+	        }
+	    }
+
+	    // التحقق من السعة المسموح بها للقاعة
+	    if (venueCapacities.containsKey(venue) && numberOfGuests > venueCapacities.get(venue)) {
+	        errorMessage = "Venue capacity exceeded for this event";
+	        return;
+	    }
+
+	    // إذا مرت جميع التحققات، قم بإضافة الحدث
+	    addEvent(new AddEvent(brideName, groomName, date, time, numberOfGuests, venue, location, phone));
+	}
+
+
+
 
     public void addEvent() {
         System.out.print("Enter Bride Name: ");
-        String brideName = input2.nextLine();
+        String brideName = input.nextLine();
         System.out.print("Enter Groom Name: ");
-        String groomName = input2.nextLine();
+        String groomName = input.nextLine();
         System.out.print("Enter Event Date: ");
-        String eventDate = input2.nextLine();
+        String eventDate = input.nextLine();
         System.out.print("Enter Event time: ");
-        String eventTime = input2.nextLine();
+        String eventTime = input.nextLine();
         System.out.print("Enter Number of Guests: ");
         int numberOfGuests;
         while (true) {
             try {
-                numberOfGuests = Integer.parseInt(input2.nextLine());
+                numberOfGuests = Integer.parseInt(input.nextLine());
                 break;
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a valid number.");
             }
         }
         System.out.print("Enter Venue Name: ");
-        String venueName = input2.nextLine();
+        String venueName = input.nextLine();
         System.out.print("Enter Event Location: ");
-        String eventLocation = input2.nextLine();
+        String eventLocation = input.nextLine();
         System.out.print("Enter Your phone for contact: ");
-        String phone = input2.nextLine();
+        String phone = input.nextLine();
 
-        AddEvent newEvent = new AddEvent(brideName, groomName, eventDate, eventTime, numberOfGuests, venueName, eventLocation, phone);
-        addEvent(newEvent);
+        addEvent(new AddEvent(brideName, groomName, eventDate, eventTime, numberOfGuests, venueName, eventLocation, phone));
     }
 
     public void addMultipleEvents(List<AddEvent> newEvents) {
-        events.addAll(newEvents);
+        for (AddEvent event : newEvents) {
+            addEvent(event);
+        }
         System.out.println("Multiple events added successfully.");
     }
 
     public void displayEventListSize() {
         System.out.println("Number of events in the list: " + events.size());
     }
+
+   
+    
+
+
+
+
+
+ 
+
+	
 }
