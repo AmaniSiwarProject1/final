@@ -2,6 +2,7 @@ package Wedding.Planner;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.List;
 
 public class Main {
     static String EMAIL1;
@@ -11,6 +12,8 @@ public class Main {
     public static ArrayList<Users> UsersList = new ArrayList<>();
     public static ArrayList<Admin> AdminList = new ArrayList<>();
     public static ArrayList<ServiceProvider> ServiceProviderList = new ArrayList<>();
+    static Scanner input2 = new Scanner(System.in);
+    static EventManagment eventManager = new EventManagment();
 
     public static void setUserType(String type) {
         userType = type;
@@ -19,8 +22,6 @@ public class Main {
     public static String getUserType() {
         return userType;
     }
-
-    static Scanner input2 = new Scanner(System.in);
 
     public static Users fullInformationToSignUp() {
         System.out.println("Enter Your fullName:");
@@ -56,6 +57,7 @@ public class Main {
         System.out.println("1. Enter to Sign Up");
         System.out.println("2. Enter to Log in");
         int num = input2.nextInt();
+        input2.nextLine();
         if (num == 1) {
             signUp(fullInformationToSignUp());
             num = 2;
@@ -80,42 +82,81 @@ public class Main {
     }
 
     private static void showMenuForAd() {
-        // TODO: Add menu for admin
+        EventManagment eventManager1 = new EventManagment();
+
+        Scanner scanner = new Scanner(System.in);
+        boolean running = true;
+
+        while (running) {
+            System.out.println("1. Add Event");
+            System.out.println("2. List All Events");
+            System.out.println("3. Remove Events");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    eventManager1.addEvent();
+                    break;
+
+                case 2:
+                    // TODO: Implement List All Events
+                    break;
+
+                case 3:
+                    // TODO: Implement Remove Events
+                    break;
+
+                case 4:
+                    running = false; // Exit the loop and return to the main menu
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Please enter a number between 1 and 4.");
+                    break;
+            }
+        }
     }
 
-    private static void showMenuForUser() {
-        System.out.println("------------------------------------------------");
-        System.out.println("1. View Profile");
-        System.out.println("2. Edit Profile");
-        System.out.println("3. Search for Services");
-        System.out.println("4. Book a Service");
-        System.out.println("5. View My Bookings");
-        System.out.println("6. Log out");
-        System.out.println("------------------------------------------------");
 
-        int num = input2.nextInt();
-        switch (num) {
-            case 1:
-                // TODO: View Profile
-                break;
-            case 2:
-                // TODO: Edit Profile
-                break;
-            case 3:
-                // TODO: Search for Services
-                break;
-            case 4:
-                // TODO: Book a Service
-                break;
-            case 5:
-                // TODO: View My Bookings
-                break;
-            case 6:
-                // TODO: Log out
-                break;
-            default:
-                System.out.println("Invalid input. Please choose a number between 1 and 6.");
-                break;
+    private static void showMenuForUser() {
+        EventManagment eventManager1 = new EventManagment();
+
+        boolean running = true;
+
+        while (running) {
+            System.out.println("------------------------------------------------");
+            System.out.println("1. View Profile");
+            System.out.println("2. Edit Profile");
+            System.out.println("3. Add Event");     
+            System.out.println("4. Log out");
+            System.out.println("------------------------------------------------");
+
+            int num = input2.nextInt();
+            input2.nextLine(); // Consume newline character
+
+            switch (num) {
+                case 1:
+                    // TODO: View Profile
+                    break;
+                case 2:
+                    // TODO: Edit Profile
+                    break;
+                case 3:
+                    eventManager1.addEvent();
+                    break;
+
+                case 4:
+                    // TODO: Log out
+                    running = false; // Exit the loop and return to the main menu
+                    break;
+
+                default:
+                    System.out.println("Invalid input. Please choose a number between 1 and 7.");
+                    break;
+            }
         }
     }
 
@@ -159,6 +200,14 @@ public class Main {
 
         ServiceProvider provider1 = new ServiceProvider("Bob Smith", "siam@example.com", "password789", "Photography");
         ServiceProviderList.add(provider1);
+
+        List<AddEvent> newEventsList = new ArrayList<>();
+
+        newEventsList.add(new AddEvent("Bride1", "Groom1", "2024-05-20", "10:00 AM", 100, "Venue1", "Location1", "Phone1"));
+        newEventsList.add(new AddEvent("Bride2", "Groom2", "2024-06-15", "11:30 AM", 150, "Venue2", "Location2", "Phone2"));
+        newEventsList.add(new AddEvent("Bride3", "Groom3", "2024-07-10", "02:00 PM", 200, "Venue3", "Location3", "Phone3"));
+
+        eventManager.addMultipleEvents(newEventsList);
 
         System.out.println("------------------------------------------------");
         System.out.println("1. Sign Up");
