@@ -8,14 +8,22 @@ import java.util.Scanner;
 
 public class EventManagment {
     private String errorMessage;
+    private Map<String, Integer> venueCapacities; // HashMap لتخزين سعة كل قاعة
 
     private List<AddEvent> events;
     private static Scanner input = new Scanner(System.in); // Use static to avoid creating multiple instances
 
+    
     public EventManagment() {
         events = new ArrayList<>();
+        venueCapacities = new HashMap<>();
+        initializeVenueCapacities();
     }
-   
+    private void initializeVenueCapacities() {
+        venueCapacities.put("Venue1", 100);
+        venueCapacities.put("Venue2", 150);
+        venueCapacities.put("Venue3", 200);
+    }
     public String getErrorMessage() {
         return errorMessage;
     }
@@ -32,8 +40,16 @@ public class EventManagment {
     public boolean checkEventsExist(String brideName, String groomName, String date, String time, int numberOfGuests,
             String venue, String location, String phone) {
         for (AddEvent existingEvent : events) {
-            // تحقق من تطابق كل المعلومات المعطاة مع الأحداث الموجودة في القائمة
-            if (existingEvent.getBrideName().equals(brideName) &&
+            // تحقق من عدم وجود قيم null قبل استخدام equals()
+            if (existingEvent.getBrideName() != null &&
+                existingEvent.getGroomName() != null &&
+                existingEvent.getDate() != null &&
+                existingEvent.getTime() != null &&
+                existingEvent.getVenue() != null &&
+                existingEvent.getLocation() != null &&
+                existingEvent.getPhone() != null &&
+                // تحقق من تطابق كل الخصائص بين الحدث الحالي والحدث المطلوب
+                existingEvent.getBrideName().equals(brideName) &&
                 existingEvent.getGroomName().equals(groomName) &&
                 existingEvent.getDate().equals(date) &&
                 existingEvent.getTime().equals(time) &&
@@ -46,6 +62,7 @@ public class EventManagment {
         }
         return false; // الحدث غير موجود
     }
+
 
 
 
