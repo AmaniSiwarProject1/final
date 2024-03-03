@@ -5,6 +5,8 @@ import java.util.Scanner;
 import java.util.List;
 
 public class Main {
+    static List<AddEvent> newEventsList = new ArrayList<>();
+
     static String EMAIL1;
     private static final String EMAIL = "Enter your Email please";
     private static final String PASS = "Enter your password please";
@@ -90,7 +92,7 @@ public class Main {
         while (running) {
             System.out.println("1. Add Event");
             System.out.println("2. List All Events");
-            System.out.println("3. Remove Events");
+            System.out.println("3. Update Events");
             System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
@@ -102,12 +104,15 @@ public class Main {
                     break;
 
                 case 2:
-                    // TODO: Implement List All Events
+                    eventManager1.listAllEvents();
                     break;
 
                 case 3:
-                    // TODO: Implement Remove Events
-                    break;
+                	eventManager1.updateEvent(newEventsList);
+
+                	   break;
+
+
 
                 case 4:
                     running = false; // Exit the loop and return to the main menu
@@ -131,7 +136,9 @@ public class Main {
             System.out.println("1. View Profile");
             System.out.println("2. Edit Profile");
             System.out.println("3. Add Event");     
+            System.out.println("4. Update Event ");
             System.out.println("4. Log out");
+
             System.out.println("------------------------------------------------");
 
             int num = input2.nextInt();
@@ -145,12 +152,15 @@ public class Main {
                     // TODO: Edit Profile
                     break;
                 case 3:
-                    eventManager1.addEvent();
+                	eventManager1.updateEvent(newEventsList);
+
                     break;
 
+
+
+
                 case 4:
-                    // TODO: Log out
-                    running = false; // Exit the loop and return to the main menu
+                    running = false;
                     break;
 
                 default:
