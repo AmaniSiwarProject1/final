@@ -15,7 +15,7 @@ public class Main {
     public static ArrayList<Admin> AdminList = new ArrayList<>();
     public static ArrayList<ServiceProvider> ServiceProviderList = new ArrayList<>();
     static Scanner input2 = new Scanner(System.in);
-    static EventManagment eventManager = new EventManagment();
+    public static EventManagment eventManager = new EventManagment();
 
     public static void setUserType(String type) {
         userType = type;
