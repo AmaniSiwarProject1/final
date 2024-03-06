@@ -257,13 +257,40 @@ public class EventManagment {
                System.out.println("Event with date " + eventDate + " and time " + eventTime + " not found.");
            }
     }
+    public void deleteEvent(String eventDate, String eventTime) {
 
+    	  
 
+        AddEvent selectedEvent = null;
+        for (AddEvent event : events) {
+            if (event.getDate().equals(eventDate) && event.getTime().equals(eventTime)) {
+                selectedEvent = event;
+                break;
+            }
+        }
 
+        if (selectedEvent != null) {
+            System.out.println("Are you sure you want to delete the following event?");
+            System.out.println("Bride Name: " + selectedEvent.getBrideName());
+            System.out.println("Groom Name: " + selectedEvent.getGroomName());
+            System.out.println("Date: " + selectedEvent.getDate());
+            System.out.println("Time: " + selectedEvent.getTime());
+            System.out.println("Number of Guests: " + selectedEvent.getNumberOfGuests());
+            System.out.println("Venue: " + selectedEvent.getVenue());
+            System.out.println("Location: " + selectedEvent.getLocation());
+            System.out.println("Phone: " + selectedEvent.getPhone());
+            System.out.println("Enter 'yes' to confirm deletion or any other key to cancel: ");
+            Scanner scanner1 = new Scanner(System.in);
+			String confirmation = scanner1.nextLine();
 
-
-
- 
-
-	
+            if (confirmation.equalsIgnoreCase("yes")) {
+                events.remove(selectedEvent);
+                System.out.println("Event deleted successfully.");
+            } else {
+                System.out.println("Deletion canceled.");
+            }
+        } else {
+            System.out.println("Event with date " + eventDate + " and time " + eventTime + " not found.");
+        }
+    }
 }

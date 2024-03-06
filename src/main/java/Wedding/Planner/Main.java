@@ -93,7 +93,8 @@ public class Main {
             System.out.println("1. Add Event");
             System.out.println("2. List All Events");
             System.out.println("3. Update Events");
-            System.out.println("4. Exit");
+            System.out.println("4. Delete Events");
+            System.out.println("5. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -112,9 +113,21 @@ public class Main {
 
                 	   break;
 
-
-
                 case 4:
+            
+
+                    Scanner scanner1 = new Scanner(System.in);
+
+                    System.out.println("Enter the date of the event you want to delete (yyyy-MM-dd): ");
+                    String eventDate = scanner.nextLine();
+
+                    System.out.println("Enter the time of the event you want to delete (hh:mm a): ");
+                    String eventTime = scanner.nextLine();
+
+                    eventManager1.deleteEvent(eventDate, eventTime);
+
+              	   break;
+                case 5:
                     running = false; // Exit the loop and return to the main menu
                     break;
 
@@ -124,7 +137,6 @@ public class Main {
             }
         }
     }
-
 
     private static void showMenuForUser() {
         EventManagment eventManager1 = new EventManagment();
@@ -142,7 +154,7 @@ public class Main {
             System.out.println("------------------------------------------------");
 
             int num = input2.nextInt();
-            input2.nextLine(); // Consume newline character
+            input2.nextLine(); 
 
             switch (num) {
                 case 1:

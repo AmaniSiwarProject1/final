@@ -15,13 +15,11 @@ public class UpdateEvent {
 
     @Given("The user wants to update an event and The event does not exist in the events list")
     public void theUserWantsToUpdateAnEventAndTheEventDoesNotExistInTheEventsList() {
-        // Here you can add any necessary setup steps
        assertTrue(true);
     }
 
     @When("The user provides the new event details")
     public void theUserProvidesTheNewEventDetails() {
-        // Here you can simulate user input or provide the new event details
         String brideName = "New Bride";
         String groomName = "New Groom";
         String date = "2024-12-31";
@@ -71,7 +69,6 @@ public class UpdateEvent {
 
     @Then("The system updates the event and The system confirms the event was updated successfully")
     public void theSystemUpdatesTheEventAndTheSystemConfirmsTheEventWasUpdatedSuccessfully() {
-        // Check the updated event details
         assertEquals("Updated Bride", updatedEvent.getBrideName());
         assertEquals("Updated Groom", updatedEvent.getGroomName());
         assertEquals("2024-12-31", updatedEvent.getDate());
