@@ -309,4 +309,103 @@ public class EventManagment {
             System.out.println("Event with date " + eventDate + " and time " + eventTime + " not found.");
         }
     }
+    public void Venueadd(){
+  	  List<Venue> venues = new ArrayList<>();
+        venues.add(new Venue("Garden",500.0, "2024-04-01","15:00"));
+        venues.add(new Venue("Gold Venue",  700.0, "2024-04-01","2:00"));
+        venues.add(new Venue("Sunset Venue",  1000.0, "2024-04-01","5:30"));
+        venues.add(new Venue("Light Venue",  800.0, "2024-04-01","10:20"));
+
+        // Create a VenueFinder object
+        VenueFinder venueFinder = new VenueFinder();
+
+        // Get user input for max price and wedding date
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the maximum price you can pay: ");
+        double maxPrice = scanner.nextDouble();
+
+        System.out.print("Enter the wedding date (YYYY-MM-DD): ");
+        String weddingDate = "";
+      
+
+        // Validate the wedding date format
+        boolean validDate = false;
+        while (!validDate) {
+            weddingDate = scanner.next();
+            if (isValidDateFormat(weddingDate)) {
+                validDate = true;
+            } else {
+                System.out.print("Invalid date format. Please enter the date in YYYY-MM-DD format: ");
+            }
+        }
+        System.out.print("Enter the wedding time (HH:mm): ");
+        String weddingTime = "";
+        boolean validTime = false;
+        while (!validTime) {
+            weddingTime = scanner.next();
+            if (isValidTimeFormat(weddingTime)) {
+                validTime = true;
+            } else {
+                System.out.print("Invalid time format. Please enter the time in HH:mm format: ");
+            }
+        }
+
+        // Find matching venues
+        List<Venue> matchingVenues = venueFinder.findMatchingVenues(venues, maxPrice, weddingDate,weddingTime);
+
+        // Display matching venues
+        if (matchingVenues.isEmpty()) {
+            System.out.println("No venues found matching the criteria.");
+        } else {
+            System.out.println("Matching venues:");
+            for (int i = 0; i < matchingVenues.size(); i++) {
+                Venue venue = matchingVenues.get(i);
+                System.out.println((i + 1) + ". " + venue.getName() + " - Price: $" + venue.getPrice());
+            }
+
+            System.out.print("Choose a venue (enter the number): ");
+            int choice = scanner.nextInt();
+
+            if (choice >= 1 && choice <= matchingVenues.size()) {
+                Venue selectedVenue = matchingVenues.get(choice - 1);
+
+                System.out.println("Selected Venue: " + selectedVenue.getName());
+                System.out.println("Price: $" + selectedVenue.getPrice());
+                System.out.println("Wedding Date: " + selectedVenue.getAvailableDate());
+                System.out.println("Wedding Time: " + selectedVenue.getAvailablehour());
+
+                System.out.print("Confirm booking? (yes/no): ");
+                String confirm = scanner.next();
+
+                if (confirm.equalsIgnoreCase("yes")) {
+                    System.out.print("Enter your name: ");
+                    String name = scanner.next();
+
+                    System.out.print("Enter the bride's name: ");
+                    String brideName = scanner.next();
+
+                    // Call addEvent function to finalize booking
+                    addEvent();
+                    System.out.println("Booking confirmed! Event added successfully.");
+                } else {
+                    System.out.println("Booking canceled.");
+                }
+            } else {
+                System.out.println("Invalid choice.");
+            }
+        }
+
+
+        scanner.close();
+    
+    }
+  private static boolean isValidDateFormat(String date) {
+      String regex = "\\d{4}-\\d{2}-\\d{2}";
+      return date.matches(regex);
+  }
+  private static boolean isValidTimeFormat(String time) {
+      String regex = "\\d{2}:\\d{2}";
+      return time.matches(regex);
+  }
+    
 }

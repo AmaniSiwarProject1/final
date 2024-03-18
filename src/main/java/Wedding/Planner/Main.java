@@ -94,7 +94,9 @@ public class Main {
             System.out.println("2. List All Events");
             System.out.println("3. Update Events");
             System.out.println("4. Delete Events");
-            System.out.println("5. Exit");
+            System.out.println("5. Venue mach");
+
+            System.out.println("6. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -128,9 +130,9 @@ public class Main {
 
               	   break;
                 case 5:
-                    running = false; // Exit the loop and return to the main menu
-                    break;
+                	eventManager1.Venueadd();
 
+                case 6:
                 default:
                     System.out.println("Invalid choice. Please enter a number between 1 and 4.");
                     break;
