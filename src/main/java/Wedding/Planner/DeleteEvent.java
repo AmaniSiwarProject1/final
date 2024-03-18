@@ -11,9 +11,9 @@ public class DeleteEvent {
     private String groomName;
     private String venue;
     private String phone;
+    private String price;
 
-    // Constructor
-    public DeleteEvent(String brideName, String groomName, String date, String time, int numberOfGuests, String venue, String location, String phone) {
+    public DeleteEvent(String brideName, String groomName, String date, String time, int numberOfGuests, String venue, String location, String phone,String price) {
         this.brideName = brideName;
         this.groomName = groomName;
         this.date = date;
@@ -22,6 +22,8 @@ public class DeleteEvent {
         this.venue = venue;
         this.location = location;
         this.phone = phone;
+        this.price= price;
+
     }
 
     // Getters and Setters
@@ -87,5 +89,11 @@ public class DeleteEvent {
 
     public void setTime(String time) {
         this.time = time;
+    }
+    public String getPrice() {
+        return price;
+    }
+    public void setPrice(String price) {
+        this.price =price;
     }
 }

@@ -27,7 +27,7 @@ public class EventManagment {
         return errorMessage;
     }
     public void addEvent(AddEvent event) {
-        if (checkEventsExist(event.getBrideName(), event.getGroomName(), event.getDate(), event.getTime(), event.getNumberOfGuests(), event.getVenue(), event.getLocation(), event.getPhone())) {
+        if (checkEventsExist(event.getBrideName(), event.getGroomName(), event.getDate(), event.getTime(), event.getNumberOfGuests(), event.getVenue(), event.getLocation(), event.getPhone(),event.getPrice())) {
             System.out.println("Event already exists in the list.");
         } else {
             events.add(event);
@@ -37,7 +37,7 @@ public class EventManagment {
 
 
     public boolean checkEventsExist(String brideName, String groomName, String date, String time, int numberOfGuests,
-            String venue, String location, String phone) {
+            String venue, String location, String phone,String price) {
         for (AddEvent existingEvent : events) {
             if (existingEvent.getBrideName() != null &&
                 existingEvent.getGroomName() != null &&
@@ -46,6 +46,7 @@ public class EventManagment {
                 existingEvent.getVenue() != null &&
                 existingEvent.getLocation() != null &&
                 existingEvent.getPhone() != null &&
+                existingEvent.getPrice() != null &&
                 existingEvent.getBrideName().equals(brideName) &&
                 existingEvent.getGroomName().equals(groomName) &&
                 existingEvent.getDate().equals(date) &&
@@ -53,7 +54,8 @@ public class EventManagment {
                 existingEvent.getNumberOfGuests() == numberOfGuests &&
                 existingEvent.getVenue().equals(venue) &&
                 existingEvent.getLocation().equals(location) &&
-                existingEvent.getPhone().equals(phone)) {
+                existingEvent.getPhone().equals(phone) &&
+                existingEvent.getPrice().equals(price)){
                 return true; 
             }
         }
@@ -76,9 +78,7 @@ public class EventManagment {
             }
         }
     }
-
-
-	public void createWeddingEvent(String brideName, String groomName, String date, String time, int numberOfGuests, String venue, String location, String phone) {
+    public void createWeddingEvent(String brideName, String groomName, String date, String time, int numberOfGuests, String venue, String location, String phone,String price) {
 	    Map<String, Integer> venueCapacities = new HashMap<>();
 	    venueCapacities.put("Venue1", 100);
 	    venueCapacities.put("Venue2", 150);
@@ -97,8 +97,10 @@ public class EventManagment {
 	        return;
 	    }
 
-	    addEvent(new AddEvent(brideName, groomName, date, time, numberOfGuests, venue, location, phone));
+	    addEvent(new AddEvent(brideName, groomName, date, time, numberOfGuests, venue, location, phone,price));
 	}
+
+
 
 
 	
@@ -129,8 +131,10 @@ public class EventManagment {
         String eventLocation = input.nextLine();
         System.out.print("Enter Your phone for contact: ");
         String phone = input.nextLine();
+        System.out.print("Enter the price: ");
+        String price = input.nextLine();
 
-        addEvent(new AddEvent(brideName, groomName, eventDate, eventTime, numberOfGuests, venueName, eventLocation, phone));
+        addEvent(new AddEvent(brideName, groomName, eventDate, eventTime, numberOfGuests, venueName, eventLocation, phone,price));
     }
 
     public void addMultipleEvents(List<AddEvent> newEvents) {
@@ -156,6 +160,8 @@ public class EventManagment {
                 System.out.println("Venue: " + event.getVenue());
                 System.out.println("Location: " + event.getLocation());
                 System.out.println("Phone: " + event.getPhone());
+                System.out.println("Price: " + event.getPrice());
+
                 System.out.println();
             }
         }
@@ -191,6 +197,8 @@ public class EventManagment {
                System.out.println("Venue: " + selectedEvent.getVenue());
                System.out.println("Location: " + selectedEvent.getLocation());
                System.out.println("Phone: " + selectedEvent.getPhone());
+               System.out.println("Price: " + selectedEvent.getPrice());
+
 
                System.out.println("Enter New Bride Name (or press Enter to keep the same): ");
                String brideName = scanner.nextLine();
@@ -241,6 +249,11 @@ public class EventManagment {
                if (!phone.isEmpty()) {
                    selectedEvent.setPhone(phone);
                }
+               System.out.println("Enter New price Number (or press Enter to keep the same): ");
+               String price = scanner.nextLine();
+               if (!phone.isEmpty()) {
+                   selectedEvent.setPhone(price);
+               }
                System.out.println("Updated Event Information:");
                System.out.println("Bride Name: " + selectedEvent.getBrideName());
                System.out.println("Groom Name: " + selectedEvent.getGroomName());
@@ -251,7 +264,8 @@ public class EventManagment {
                System.out.println("Location: " + selectedEvent.getLocation());
                System.out.println("Phone: " + selectedEvent.getPhone());
                
-         
+               System.out.println("Phone: " + selectedEvent.getPrice());
+
                System.out.println("Event updated successfully.");
            } else {
                System.out.println("Event with date " + eventDate + " and time " + eventTime + " not found.");
@@ -279,6 +293,8 @@ public class EventManagment {
             System.out.println("Venue: " + selectedEvent.getVenue());
             System.out.println("Location: " + selectedEvent.getLocation());
             System.out.println("Phone: " + selectedEvent.getPhone());
+            System.out.println("Price: " + selectedEvent.getPrice());
+
             System.out.println("Enter 'yes' to confirm deletion or any other key to cancel: ");
             Scanner scanner1 = new Scanner(System.in);
 			String confirmation = scanner1.nextLine();

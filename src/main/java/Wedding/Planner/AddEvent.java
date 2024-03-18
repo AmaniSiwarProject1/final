@@ -11,9 +11,9 @@ public class AddEvent {
     private String groomName;
     private String venue;
     private String phone;
+    private String price;
 
-    // Constructor
-    public AddEvent(String brideName, String groomName, String date,String time, int numberOfGuests, String venue, String location,String phone) {
+    public AddEvent(String brideName, String groomName, String date,String time, int numberOfGuests, String venue, String location,String phone,String price) {
         this.brideName = brideName;
         this.groomName = groomName;
         this.date = date;
@@ -22,9 +22,10 @@ public class AddEvent {
         this.venue = venue;
         this.location = location;
         this.phone=phone;
+        this.price= price;
+
     }
 
-    // Getters and Setters
     public String getDate() {
         return date;
     }
@@ -84,5 +85,11 @@ public class AddEvent {
     }
     public String getTime() {
         return time;
+    }
+    public String getPrice() {
+        return price;
+    }
+    public void setPrice(String price) {
+        this.price =price;
     }
 }

@@ -28,8 +28,9 @@ public class UpdateEvent {
         String venue = "New Venue";
         String location = "New Location";
         String phone = "New Phone";
+        String price = "New price";
 
-        updatedEvent = new AddEvent(brideName, groomName, date, time, numberOfGuests, venue, location, phone);
+        updatedEvent = new AddEvent(brideName, groomName, date, time, numberOfGuests, venue, location, phone,price);
     }
 
     @Then("The system displays a message that the event was not found")
@@ -49,7 +50,7 @@ public class UpdateEvent {
     }
     @Given("The user wants to update an event")
     public void theUserWantsToUpdateAnEvent() {
-        updatedEvent = new AddEvent("Original Bride", "Original Groom", "2024-12-25", "18:00", 100, "Original Venue", "Original Location", "Original Phone");
+        updatedEvent = new AddEvent("Original Bride", "Original Groom", "2024-12-25", "18:00", 100, "Original Venue", "Original Location", "Original Phone","price");
         eventManager.addEvent(updatedEvent);
     }
 
@@ -63,6 +64,7 @@ public class UpdateEvent {
         updatedEvent.setVenue("Updated Venue");
         updatedEvent.setLocation("Updated Location");
         updatedEvent.setPhone("Updated Phone");
+        updatedEvent.setPrice("Updated Price");
 
        assertTrue(true);
     }
@@ -77,6 +79,7 @@ public class UpdateEvent {
         assertEquals("Updated Venue", updatedEvent.getVenue());
         assertEquals("Updated Location", updatedEvent.getLocation());
         assertEquals("Updated Phone", updatedEvent.getPhone());
+        assertEquals("Updated Price", updatedEvent.getPrice());
 
         assertTrue(true);
     }

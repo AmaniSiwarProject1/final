@@ -10,7 +10,6 @@ public class EditEvent {
     private String location;
     private String phone;
 
-    // Constructor
     public EditEvent(String brideName, String groomName, String date, String time, int numberOfGuests, String venue, String location, String phone) {
         this.brideName = brideName;
         this.groomName = groomName;
