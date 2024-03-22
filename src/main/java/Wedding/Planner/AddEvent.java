@@ -80,7 +80,7 @@ public class AddEvent {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    public void setTime(String phone) {
+    public void setTime(String time) {
         this.time = time;
     }
     public String getTime() {
@@ -92,4 +92,14 @@ public class AddEvent {
     public void setPrice(String price) {
         this.price =price;
     }
+    private String eventName;
+
+    public AddEvent(String eventName) {
+        this.eventName = eventName;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
 }
