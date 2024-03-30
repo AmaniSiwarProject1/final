@@ -4,11 +4,11 @@
   <artifactId>WeddingPlannerProject</artifactId>
   <version>0.0.1-SNAPSHOT</version>
    <!-- https://mvnrepository.com/artifact/junit/junit -->
-   <properties>
+  <properties>
   <sonar.organization>amanisiwarproject1</sonar.organization>
   <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-   <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+  <maven.compiler.source>17</maven.compiler.source>
+  <maven.compiler.target>17</maven.compiler.target>
 </properties>
   <dependencies>
 <dependency>
