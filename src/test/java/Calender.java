@@ -4,13 +4,13 @@ import io.cucumber.java.en.Then;
 import static org.junit.Assert.*;
 
 import Wedding.Planner.AddEvent;
-import Wedding.Planner.EventManagment;
+import Wedding.Planner.EventManagement;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Calender {
-    private EventManagment eventManager = new EventManagment();
+    private EventManagement eventManager = new EventManagement();
     private List<AddEvent> events = new ArrayList<>();
     private String viewOutcome;
 

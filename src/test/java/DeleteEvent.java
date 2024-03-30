@@ -2,14 +2,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import Wedding.Planner.EventManagment;
+import Wedding.Planner.EventManagement;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class DeleteEvent {
 
-    private EventManagment eventManagment;
+    private EventManagement eventManagment;
 
     @Given("The user entered information about the event")
     public void theUserEnteredInformationAboutTheEvent() {
@@ -18,7 +18,7 @@ assertTrue(true);    }
     @When("The user attempts to delete an event")
     public void theUserAttemptsToDeleteAnEvent() {
         
-        eventManagment = new EventManagment();
+        eventManagment = new EventManagement();
         eventManagment.deleteEvent("2024-03-06", "10:00 AM");
     }
 
@@ -43,7 +43,7 @@ assertTrue(true);    }
 
     @Then("The system deletes the event")
     public void theSystemDeletesTheEvent() {
-    	eventManagment = new EventManagment();
+    	eventManagment = new EventManagement();
      
         eventManagment.deleteEvent("2024-03-06", "10:00 AM");
     }
@@ -61,7 +61,7 @@ assertTrue(true);    }
     @When("The user attempts to delete the event")
     public void theUserAttemptsToDeleteTheEvent() {
 
-    	eventManagment = new EventManagment();
+    	eventManagment = new EventManagement();
         if (eventExists) {
             assertTrue(true);
        } else {

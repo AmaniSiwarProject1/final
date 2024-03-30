@@ -1,5 +1,5 @@
 import Wedding.Planner.AddEvent;
-import Wedding.Planner.EventManagment;
+import Wedding.Planner.EventManagement;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -7,11 +7,11 @@ import org.junit.Assert;
 
 public class AddEventTest {
 	
-	 private EventManagment eventManagement;
+	 private EventManagement eventManagement;
 	    private AddEvent newEvent;
 	    @Given("the User is logged in")
 	    public void theUserIsLoggedIn() {
-	        eventManagement = new EventManagment();
+	        eventManagement = new EventManagement();
 
 	    }
 	@Given("there is no event with brideName {string}, groomName {string}, date {string}, time {string}, numberOfGuests {string}, venue {string}, location {string}, phone {string} , and price {string}")

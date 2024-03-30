@@ -1,12 +1,13 @@
 package Wedding.Planner;
 import java.util.*;
+import java.util.logging.Logger;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
 import java.util.List;
 
-import Wedding.Planner.EventManagment.VenueEditor;
+import Wedding.Planner.EventManagement.VenueEditor;
 
 public class Main {
     static List<AddEvent> newEventsList = new ArrayList<>();
@@ -19,7 +20,8 @@ public class Main {
     public static ArrayList<Admin> AdminList = new ArrayList<>();
     public static ArrayList<ServiceProvider> ServiceProviderList = new ArrayList<>();
     static Scanner input2 = new Scanner(System.in);
-    public static EventManagment eventManager = new EventManagment();
+    public static EventManagement eventManager = new EventManagement();
+    private static final Logger logger = Logger.getLogger(EventManagement.class.getName());
 
     public static void setUserType(String type) {
         userType = type;
@@ -30,11 +32,11 @@ public class Main {
     }
 
     public static Users fullInformationToSignUp() {
-        System.out.println("Enter Your fullName:");
+    	logger.info("Enter Your fullName:");
         String fullName = input2.next();
-        System.out.println("Enter Your Email:");
+        logger.info("Enter Your Email:");
         String Email = input2.next();
-        System.out.println("Enter Your password:");
+        logger.info("Enter Your password:");
         String password = input2.next();
         return new Users(fullName, Email, password);
     }
@@ -58,10 +60,10 @@ public class Main {
     }
 
     private static void showMenuForNone() {
-        System.out.println("You are not a user in this system!");
-        System.out.println("Please sign up as a new user or log in again");
-        System.out.println("1. Enter to Sign Up");
-        System.out.println("2. Enter to Log in");
+    	logger.info("You are not a user in this system!");
+    	logger.info("Please sign up as a new user or log in again");
+    	logger.info("1. Enter to Sign Up");
+    	logger.info("2. Enter to Log in");
         int num = input2.nextInt();
         input2.nextLine();
         if (num == 1) {
@@ -71,11 +73,11 @@ public class Main {
         if (num == 2) {
             System.out.println(EMAIL);
             EMAIL1 = input2.next();
-            System.out.println(PASS);
+            logger.info(PASS);
             String pass = input2.next();
             String userType = login(EMAIL1, pass);
             if (!userType.equals("None")) {
-                System.out.println("Login successful!");
+            	logger.info("Login successful!");
                 showMenu(userType);
             } else {
                 showMenuForNone(); 
@@ -84,23 +86,23 @@ public class Main {
     }
 
     private static void showMenuForSp() {
-    	 EventManagment eventManager1 = new EventManagment();
-    	 VenueEditor venueEditor = eventManager.new VenueEditor();
+    	EventManagement eventManager1 = new EventManagement();
+    	VenueEditor venueEditor = eventManager.new VenueEditor();
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
 
         while (running) {
-            System.out.println("1. Add Event");
-            System.out.println("2. List All Events");
-            System.out.println("3. Update Events");
-            System.out.println("4. Delete Events");
-            System.out.println("5. Add Venue");
-            System.out.println("6. calanderSuperProvider");
-            System.out.println("7. Edit Venue");
-            System.out.println("8. Delete Venue");
-            System.out.println("9. Add Photo or Vedio: ");
-            System.out.println("10. Exit");
-            System.out.print("Enter your choice: ");
+        	logger.info("1. Add Event");
+        	logger.info("2. List All Events");
+        	logger.info("3. Update Events");
+        	logger.info("4. Delete Events");
+        	logger.info("5. Add Venue");
+        	logger.info("6. calanderSuperProvider");
+        	logger.info("7. Edit Venue");
+        	logger.info("8. Delete Venue");
+        	logger.info("9. Add Photo or Vedio: ");
+        	logger.info("10. Exit");
+        	logger.info("Enter your choice: ");
 
             int choice;
             try {
@@ -121,9 +123,9 @@ public class Main {
                         break;
 
                     case 4:
-                        System.out.println("Enter the date of the event you want to delete (yyyy-MM-dd): ");
+                    	logger.info("Enter the date of the event you want to delete (yyyy-MM-dd): ");
                         String eventDate = scanner.nextLine();
-                        System.out.println("Enter the time of the event you want to delete (hh:mm a): ");
+                        logger.info("Enter the time of the event you want to delete (hh:mm a): ");
                         String eventTime = scanner.nextLine();
                         eventManager1.deleteEvent(eventDate, eventTime);
                         break;
@@ -142,7 +144,7 @@ public class Main {
                         eventManager.calanderSuperProvider();
                         break;
                     case 7:
-                    	 System.out.println("Enter the name of the venue you want to edit: ");
+                    	logger.info("Enter the name of the venue you want to edit: ");
                          String venueNameToEdit = scanner.nextLine();
                          
                          venueEditor.editVenue(venueNameToEdit);
@@ -157,16 +159,16 @@ public class Main {
 
                     case 10:
                       
-                        System.out.println("Thanks for visiting the program.");
+                    	logger.info("Thanks for visiting the program.");
                         System.exit(0);
                         break;
                     default:
                     	
-                        System.out.println("Invalid choice. Please enter a number between 1 and 10.");
+                    	logger.info("Invalid choice. Please enter a number between 1 and 10.");
                         break;
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a valid number.");
+            	logger.info("Invalid input. Please enter a valid number.");
                 scanner.nextLine(); 
                 continue;
             }
@@ -179,26 +181,26 @@ public class Main {
     
 
  private static void showMenuForAd() {
-	 EventManagment eventManager1 = new EventManagment();
-	 VenueEditor venueEditor = eventManager.new VenueEditor();
+	 EventManagement eventManager1 = new EventManagement();
+	VenueEditor venueEditor = eventManager.new VenueEditor();
     Scanner scanner = new Scanner(System.in);
     boolean running = true;
 
     while (running) {
-        System.out.println("1. Add Event");
-        System.out.println("2. List All Events");
-        System.out.println("3. Update Events");
-        System.out.println("4. Delete Events");
-        System.out.println("5. Venue Mach");
-        System.out.println("6. Add Venue");
-        System.out.println("7. Calender for user");
-        System.out.println("8. Calender for Admin");
-        System.out.println("9. calanderSuperProvider");
-        System.out.println("10. Edit Venue");
-        System.out.println("11. Delete Venue");
-        System.out.println("12. Add Photo or Vedio: ");
-        System.out.println("13. Exit");
-        System.out.print("Enter your choice: ");
+    	logger.info("1. Add Event");
+    	logger.info("2. List All Events");
+    	logger.info("3. Update Events");
+    	logger.info("4. Delete Events");
+    	logger.info("5. Venue Mach");
+    	logger.info("6. Add Venue");
+    	logger.info("7. Calender for user");
+    	logger.info("8. Calender for Admin");
+    	logger.info("9. calanderSuperProvider");
+    	logger.info("10. Edit Venue");
+    	logger.info("11. Delete Venue");
+    	logger.info("12. Add Photo or Vedio: ");
+    	logger.info("13. Exit");
+    	logger.info("Enter your choice: ");
 
         int choice;
         try {
@@ -219,9 +221,9 @@ public class Main {
                     break;
 
                 case 4:
-                    System.out.println("Enter the date of the event you want to delete (yyyy-MM-dd): ");
+                	logger.info("Enter the date of the event you want to delete (yyyy-MM-dd): ");
                     String eventDate = scanner.nextLine();
-                    System.out.println("Enter the time of the event you want to delete (hh:mm a): ");
+                    logger.info("Enter the time of the event you want to delete (hh:mm a): ");
                     String eventTime = scanner.nextLine();
                     eventManager1.deleteEvent(eventDate, eventTime);
                     break;
@@ -246,7 +248,7 @@ public class Main {
                     eventManager.calanderSuperProvider();
                     break;
                 case 10:
-                	 System.out.println("Enter the name of the venue you want to edit: ");
+                	logger.info("Enter the name of the venue you want to edit: ");
                      String venueNameToEdit = scanner.nextLine();
                      
                      venueEditor.editVenue(venueNameToEdit);
@@ -261,16 +263,16 @@ public class Main {
 
                 case 13:
                   
-                    System.out.println("Thanks for visiting the program.");
+                	logger.info("Thanks for visiting the program.");
                     System.exit(0);
                     break;
                 default:
                 	
-                    System.out.println("Invalid choice. Please enter a number between 1 and 10.");
+                	logger.info("Invalid choice. Please enter a number between 1 and 10.");
                     break;
             }
         } catch (InputMismatchException e) {
-            System.out.println("Invalid input. Please enter a valid number.");
+        	logger.info("Invalid input. Please enter a valid number.");
             scanner.nextLine(); 
             continue;
         }
@@ -280,23 +282,23 @@ public class Main {
 }
 
     private static void showMenuForUser() {
-        EventManagment eventManager1 = new EventManagment();
+    	EventManagement eventManager1 = new EventManagement();
 
         boolean running = true;
 
         while (running) {
-            System.out.println("------------------------------------------------");
-            System.out.println("1. View Profile");
-            System.out.println("2. Edit Profile");
-            System.out.println("3. Add Event");     
-            System.out.println("4. Delete Event");  
-            System.out.println("5. Update Event ");
-            System.out.println("6. Add a venue based on your budget");
-            System.out.println("7. Calender");
-            System.out.println("8. Add Photo or Vedio: ");
-            System.out.println("9. Log out");
+        	logger.info("------------------------------------------------");
+        	logger.info("1. View Profile");
+        	logger.info("2. Edit Profile");
+        	logger.info("3. Add Event");     
+        	logger.info("4. Delete Event");  
+        	logger.info("5. Update Event ");
+        	logger.info("6. Add a venue based on your budget");
+        	logger.info("7. Calender");
+        	logger.info("8. Add Photo or Vedio: ");
+        	logger.info("9. Log out");
 
-            System.out.println("------------------------------------------------");
+        	logger.info("------------------------------------------------");
             Scanner scanner = new Scanner(System.in);
             int num = input2.nextInt();
             input2.nextLine(); 
@@ -310,9 +312,9 @@ public class Main {
                 	 eventManager1.addEvent();
                      break;
                case 4:
-            	   System.out.println("Enter the date of the event you want to delete (yyyy-MM-dd): ");
+            	   logger.info("Enter the date of the event you want to delete (yyyy-MM-dd): ");
                    String eventDate = scanner.nextLine();
-                   System.out.println("Enter the time of the event you want to delete (hh:mm a): ");
+                   logger.info("Enter the time of the event you want to delete (hh:mm a): ");
                    String eventTime = scanner.nextLine();
                    eventManager1.deleteEvent(eventDate, eventTime);
                    break;
@@ -333,12 +335,12 @@ public class Main {
                 	 eventManager.Photo();
                      break;
                 case 9:
-                	System.out.println("Thanks for visiting the program.");
+                	logger.info("Thanks for visiting the program.");
                     System.exit(0);
                     break;
 
                 default:
-                    System.out.println("Invalid input. Please choose a number between 1 and 7.");
+                	logger.info("Invalid input. Please choose a number between 1 and 7.");
                     break;
             }
         }
@@ -393,29 +395,29 @@ public class Main {
 
         
 
-        System.out.println("------------------------------------------------");
-        System.out.println("1. Sign Up");
-        System.out.println("2. Log in");
-        System.out.println("3. Exit the program");
-        System.out.println("------------------------------------------------");
+        logger.info("------------------------------------------------");
+        logger.info("1. Sign Up");
+        logger.info("2. Log in");
+        logger.info("3. Exit the program");
+        logger.info("------------------------------------------------");
 
         int num = input2.nextInt();
         if (num == 1) {
             signUp(fullInformationToSignUp());
         } else if (num == 2) {
-            System.out.print(EMAIL);
+        	logger.info(EMAIL);
             EMAIL1 = input2.next();
-            System.out.print(PASS);
+            logger.info(PASS);
             String pass = input2.next();
             String userType = login(EMAIL1, pass);
             if (!userType.equals("None")) {
-                System.out.println("Login successful!");
+            	logger.info("Login successful!");
                 showMenu(userType);
             } else {
                 showMenuForNone();
             }
         } else if (num == 3) {
-            System.out.println("Thanks for visiting the program.");
+        	logger.info("Thanks for visiting the program.");
             System.exit(0);
         }
     }

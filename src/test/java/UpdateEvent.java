@@ -6,11 +6,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
-import Wedding.Planner.EventManagment;
 import Wedding.Planner.AddEvent;
+import Wedding.Planner.EventManagement;
 
 public class UpdateEvent {
-    private EventManagment eventManager = new EventManagment();
+    private EventManagement eventManager = new EventManagement();
     private AddEvent updatedEvent;
 
     @Given("The user wants to update an event and The event does not exist in the events list")
