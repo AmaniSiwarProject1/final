@@ -1,5 +1,7 @@
 package Wedding.Planner;
+import java.util.logging.Logger;
 
+import io.cucumber.plugin.event.EventHandler;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -31,7 +33,8 @@ public class EventManagment {
 
     private List<AddEvent> events;
     private static Scanner input = new Scanner(System.in);
-    
+    private static final Logger logger = Logger.getLogger(EventHandler.class.getName());
+
     public EventManagment() {
         events = new ArrayList<>();
         venueCapacities = new HashMap<>();
@@ -47,10 +50,10 @@ public class EventManagment {
     }
     public void addEvent(AddEvent event) {
         if (checkEventsExist(event.getBrideName(), event.getGroomName(), event.getDate(), event.getTime(), event.getNumberOfGuests(), event.getVenue(), event.getLocation(), event.getPhone(),event.getPrice())) {
-            System.out.println("Event already exists in the list.");
+        	logger.info("Event already exists in the list.");
         } else {
             events.add(event);
-            System.out.println("" );
+            logger.info("" );
         }
     }
 
@@ -86,7 +89,7 @@ public class EventManagment {
 
     public void listAllEvents() {
         if (events.isEmpty()) {
-            System.out.println("No events to display.");
+        	logger.info("No events to display.");
         } else {
             System.out.println("List of Events:");
             for (int i = 0; i < events.size(); i++) {
@@ -126,31 +129,31 @@ public class EventManagment {
 
 
     public void addEvent() {
-        System.out.print("Enter Bride Name: ");
+    	logger.info("Enter Bride Name: ");
         String brideName = input.nextLine();
-        System.out.print("Enter Groom Name: ");
+        logger.info("Enter Groom Name: ");
         String groomName = input.nextLine();
-        System.out.print("Enter Event Date: ");
+        logger.info("Enter Event Date: ");
         String eventDate = input.nextLine();
-        System.out.print("Enter Event time: ");
+        logger.info("Enter Event time: ");
         String eventTime = input.nextLine();
-        System.out.print("Enter Number of Guests: ");
+        logger.info("Enter Number of Guests: ");
         int numberOfGuests;
         while (true) {
             try {
                 numberOfGuests = Integer.parseInt(input.nextLine());
                 break;
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a valid number.");
+            	logger.info("Invalid input. Please enter a valid number.");
             }
         }
-        System.out.print("Enter Venue Name: ");
+        logger.info("Enter Venue Name: ");
         String venueName = input.nextLine();
-        System.out.print("Enter Event Location: ");
+        logger.info("Enter Event Location: ");
         String eventLocation = input.nextLine();
-        System.out.print("Enter Your phone for contact: ");
+        logger.info("Enter Your phone for contact: ");
         String phone = input.nextLine();
-        System.out.print("Enter the price: ");
+        logger.info("Enter the price: ");
         String price = input.nextLine();
 
         addEvent(new AddEvent(brideName, groomName, eventDate, eventTime, numberOfGuests, venueName, eventLocation, phone,price));
@@ -160,28 +163,27 @@ public class EventManagment {
         for (AddEvent event : newEvents) {
             addEvent(event);
         }
-        System.out.println("Multiple events added successfully.");
+        logger.info("Multiple events added successfully.");
     }
 
     public void displayAllEvents() {
         if (events.isEmpty()) {
-            System.out.println("No events to display.");
+        	logger.info("No events to display.");
         } else {
             System.out.println("List of Events:");
             for (int i = 0; i < events.size(); i++) {
                 AddEvent event = events.get(i);
-                System.out.println("Event " + (i + 1) + ":");
-                System.out.println("Bride Name: " + event.getBrideName());
-                System.out.println("Groom Name: " + event.getGroomName());
-                System.out.println("Date: " + event.getDate());
-                System.out.println("Time: " + event.getTime());
-                System.out.println("Number of Guests: " + event.getNumberOfGuests());
-                System.out.println("Venue: " + event.getVenue());
-                System.out.println("Location: " + event.getLocation());
-                System.out.println("Phone: " + event.getPhone());
-                System.out.println("Price: " + event.getPrice());
+                logger.info("Event " + (i + 1) + ":");
+                logger.info("Bride Name: " + event.getBrideName());
+                logger.info("Groom Name: " + event.getGroomName());
+                logger.info("Date: " + event.getDate());
+                logger.info("Time: " + event.getTime());
+                logger.info("Number of Guests: " + event.getNumberOfGuests());
+                logger.info("Venue: " + event.getVenue());
+                logger.info("Location: " + event.getLocation());
+                logger.info("Phone: " + event.getPhone());
+                logger.info("Price: " + event.getPrice());
 
-                System.out.println();
             }
         }
     }
@@ -193,9 +195,9 @@ public class EventManagment {
     public void updateEvent(List<AddEvent> eventsListt) {
         Scanner scanner = new Scanner(System.in);
 
-    	   System.out.println("Enter the date of the event you want to update (yyyy-MM-dd): ");
+        logger.info("Enter the date of the event you want to update (yyyy-MM-dd): ");
            String eventDate = scanner.nextLine();
-           System.out.println("Enter the time of the event you want to update (hh:mm a): ");
+           logger.info("Enter the time of the event you want to update (hh:mm a): ");
            String eventTime = scanner.nextLine();
 
            AddEvent selectedEvent = null;
@@ -207,87 +209,87 @@ public class EventManagment {
            }
 
            if (selectedEvent != null) {
-               System.out.println("Current Event Information:");
-               System.out.println("Bride Name: " + selectedEvent.getBrideName());
-               System.out.println("Groom Name: " + selectedEvent.getGroomName());
-               System.out.println("Date: " + selectedEvent.getDate());
-               System.out.println("Time: " + selectedEvent.getTime());
-               System.out.println("Number of Guests: " + selectedEvent.getNumberOfGuests());
-               System.out.println("Venue: " + selectedEvent.getVenue());
-               System.out.println("Location: " + selectedEvent.getLocation());
-               System.out.println("Phone: " + selectedEvent.getPhone());
-               System.out.println("Price: " + selectedEvent.getPrice());
+        	   logger.info("Current Event Information:");
+        	   logger.info("Bride Name: " + selectedEvent.getBrideName());
+        	   logger.info("Groom Name: " + selectedEvent.getGroomName());
+        	   logger.info("Date: " + selectedEvent.getDate());
+        	   logger.info("Time: " + selectedEvent.getTime());
+        	   logger.info("Number of Guests: " + selectedEvent.getNumberOfGuests());
+        	   logger.info("Venue: " + selectedEvent.getVenue());
+        	   logger.info("Location: " + selectedEvent.getLocation());
+        	   logger.info("Phone: " + selectedEvent.getPhone());
+        	   logger.info("Price: " + selectedEvent.getPrice());
 
 
-               System.out.println("Enter New Bride Name (or press Enter to keep the same): ");
+        	   logger.info("Enter New Bride Name (or press Enter to keep the same): ");
                String brideName = scanner.nextLine();
                if (!brideName.isEmpty()) {
                    selectedEvent.setBrideName(brideName);
                }
 
-               System.out.println("Enter New Groom Name (or press Enter to keep the same): ");
+               logger.info("Enter New Groom Name (or press Enter to keep the same): ");
                String groomName = scanner.nextLine();
                if (!groomName.isEmpty()) {
                    selectedEvent.setGroomName(groomName);
                }
 
-               System.out.println("Enter New Date (or press Enter to keep the same): ");
+               logger.info("Enter New Date (or press Enter to keep the same): ");
                String date = scanner.nextLine();
                if (!date.isEmpty()) {
                    selectedEvent.setDate(date);
                }
 
-               System.out.println("Enter New Time (or press Enter to keep the same): ");
+               logger.info("Enter New Time (or press Enter to keep the same): ");
                String time = scanner.nextLine();
                if (!time.isEmpty()) {
                    selectedEvent.setTime(time);
                }
 
                
-               System.out.println("Enter New Number of Guests (or press Enter to keep the same): ");
+               logger.info("Enter New Number of Guests (or press Enter to keep the same): ");
                String numberOfGuestsStr = scanner.nextLine();
                if (!numberOfGuestsStr.isEmpty()) {
                    int numberOfGuests = Integer.parseInt(numberOfGuestsStr);
                    selectedEvent.setNumberOfGuests(numberOfGuests);
                }
 
-               System.out.println("Enter New Venue Name (or press Enter to keep the same): ");
+               logger.info("Enter New Venue Name (or press Enter to keep the same): ");
                String venue = scanner.nextLine();
                if (!venue.isEmpty()) {
                    selectedEvent.setVenue(venue);
                }
 
-               System.out.println("Enter New Location (or press Enter to keep the same): ");
+               logger.info("Enter New Location (or press Enter to keep the same): ");
                String location = scanner.nextLine();
                if (!location.isEmpty()) {
                    selectedEvent.setLocation(location);
                }
 
-               System.out.println("Enter New Phone Number (or press Enter to keep the same): ");
+               logger.info("Enter New Phone Number (or press Enter to keep the same): ");
                String phone = scanner.nextLine();
                if (!phone.isEmpty()) {
                    selectedEvent.setPhone(phone);
                }
-               System.out.println("Enter New price Number (or press Enter to keep the same): ");
+               logger.info("Enter New price Number (or press Enter to keep the same): ");
                String price = scanner.nextLine();
                if (!phone.isEmpty()) {
                    selectedEvent.setPhone(price);
                }
-               System.out.println("Updated Event Information:");
-               System.out.println("Bride Name: " + selectedEvent.getBrideName());
-               System.out.println("Groom Name: " + selectedEvent.getGroomName());
-               System.out.println("Date: " + selectedEvent.getDate());
-               System.out.println("Time: " + selectedEvent.getTime());
-               System.out.println("Number of Guests: " + selectedEvent.getNumberOfGuests());
-               System.out.println("Venue: " + selectedEvent.getVenue());
-               System.out.println("Location: " + selectedEvent.getLocation());
-               System.out.println("Phone: " + selectedEvent.getPhone());
+               logger.info("Updated Event Information:");
+               logger.info("Bride Name: " + selectedEvent.getBrideName());
+               logger.info("Groom Name: " + selectedEvent.getGroomName());
+               logger.info("Date: " + selectedEvent.getDate());
+               logger.info("Time: " + selectedEvent.getTime());
+               logger.info("Number of Guests: " + selectedEvent.getNumberOfGuests());
+               logger.info("Venue: " + selectedEvent.getVenue());
+               logger.info("Location: " + selectedEvent.getLocation());
+               logger.info("Phone: " + selectedEvent.getPhone());
                
-               System.out.println("Phone: " + selectedEvent.getPrice());
+               logger.info("Phone: " + selectedEvent.getPrice());
 
-               System.out.println("Event updated successfully.");
+               logger.info("Event updated successfully.");
            } else {
-               System.out.println("Event with date " + eventDate + " and time " + eventTime + " not found.");
+        	   logger.info("Event with date " + eventDate + " and time " + eventTime + " not found.");
            }
     }
     public void deleteEvent(String eventDate, String eventTime) {
@@ -303,29 +305,29 @@ public class EventManagment {
         }
 
         if (selectedEvent != null) {
-            System.out.println("Are you sure you want to delete the following event?");
-            System.out.println("Bride Name: " + selectedEvent.getBrideName());
-            System.out.println("Groom Name: " + selectedEvent.getGroomName());
-            System.out.println("Date: " + selectedEvent.getDate());
-            System.out.println("Time: " + selectedEvent.getTime());
-            System.out.println("Number of Guests: " + selectedEvent.getNumberOfGuests());
-            System.out.println("Venue: " + selectedEvent.getVenue());
-            System.out.println("Location: " + selectedEvent.getLocation());
-            System.out.println("Phone: " + selectedEvent.getPhone());
-            System.out.println("Price: " + selectedEvent.getPrice());
+        	logger.info("Are you sure you want to delete the following event?");
+        	logger.info("Bride Name: " + selectedEvent.getBrideName());
+        	logger.info("Groom Name: " + selectedEvent.getGroomName());
+        	logger.info("Date: " + selectedEvent.getDate());
+        	logger.info("Time: " + selectedEvent.getTime());
+        	logger.info("Number of Guests: " + selectedEvent.getNumberOfGuests());
+        	logger.info("Venue: " + selectedEvent.getVenue());
+        	logger.info("Location: " + selectedEvent.getLocation());
+        	logger.info("Phone: " + selectedEvent.getPhone());
+        	logger.info("Price: " + selectedEvent.getPrice());
 
-            System.out.println("Enter 'yes' to confirm deletion or any other key to cancel: ");
+        	logger.info("Enter 'yes' to confirm deletion or any other key to cancel: ");
             Scanner scanner1 = new Scanner(System.in);
 			String confirmation = scanner1.nextLine();
 
             if (confirmation.equalsIgnoreCase("yes")) {
                 events.remove(selectedEvent);
-                System.out.println("Event deleted successfully.");
+                logger.info("Event deleted successfully.");
             } else {
-                System.out.println("Deletion canceled.");
+            	logger.info("Deletion canceled.");
             }
         } else {
-            System.out.println("Event with date " + eventDate + " and time " + eventTime + " not found.");
+        	logger.info("Event with date " + eventDate + " and time " + eventTime + " not found.");
         }
     }
     public void Venueadd(){
@@ -338,10 +340,10 @@ public class EventManagment {
         VenueFinder venueFinder = new VenueFinder();
 
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter the maximum price you can pay: ");
+        logger.info("Enter the maximum price you can pay: ");
         double maxPrice = scanner.nextDouble();
 
-        System.out.print("Enter the wedding date (YYYY-MM-DD): ");
+        logger.info("Enter the wedding date (YYYY-MM-DD): ");
         String weddingDate = "";
       
 
@@ -351,10 +353,10 @@ public class EventManagment {
             if (isValidDateFormat(weddingDate)) {
                 validDate = true;
             } else {
-                System.out.print("Invalid date format. Please enter the date in YYYY-MM-DD format: ");
+            	logger.info("Invalid date format. Please enter the date in YYYY-MM-DD format: ");
             }
         }
-        System.out.print("Enter the wedding time (HH:mm): ");
+        logger.info("Enter the wedding time (HH:mm): ");
         String weddingTime = "";
         boolean validTime = false;
         while (!validTime) {
@@ -362,49 +364,49 @@ public class EventManagment {
             if (isValidTimeFormat(weddingTime)) {
                 validTime = true;
             } else {
-                System.out.print("Invalid time format. Please enter the time in HH:mm format: ");
+            	logger.info("Invalid time format. Please enter the time in HH:mm format: ");
             }
         }
 
         List<Venue> matchingVenues = venueFinder.findMatchingVenues(venues, maxPrice, weddingDate,weddingTime);
 
         if (matchingVenues.isEmpty()) {
-            System.out.println("No venues found matching the criteria.");
+        	logger.info("No venues found matching the criteria.");
         } else {
-            System.out.println("Matching venues:");
+        	logger.info("Matching venues:");
             for (int i = 0; i < matchingVenues.size(); i++) {
                 Venue venue = matchingVenues.get(i);
-                System.out.println((i + 1) + ". " + venue.getName() + " - Price: $" + venue.getPrice());
+                logger.info((i + 1) + ". " + venue.getName() + " - Price: $" + venue.getPrice());
             }
 
-            System.out.print("Choose a venue (enter the number): ");
+            logger.info("Choose a venue (enter the number): ");
             int choice = scanner.nextInt();
 
             if (choice >= 1 && choice <= matchingVenues.size()) {
                 Venue selectedVenue = matchingVenues.get(choice - 1);
 
-                System.out.println("Selected Venue: " + selectedVenue.getName());
-                System.out.println("Price: $" + selectedVenue.getPrice());
-                System.out.println("Wedding Date: " + selectedVenue.getAvailableDate());
-                System.out.println("Wedding Time: " + selectedVenue.getAvailablehour());
+                logger.info("Selected Venue: " + selectedVenue.getName());
+                logger.info("Price: $" + selectedVenue.getPrice());
+                logger.info("Wedding Date: " + selectedVenue.getAvailableDate());
+                logger.info("Wedding Time: " + selectedVenue.getAvailablehour());
 
-                System.out.print("Confirm booking? (yes/no): ");
+                logger.info("Confirm booking? (yes/no): ");
                 String confirm = scanner.next();
 
                 if (confirm.equalsIgnoreCase("yes")) {
-                    System.out.print("Enter your name: ");
+                	logger.info("Enter your name: ");
                     String name = scanner.next();
 
-                    System.out.print("Enter the bride's name: ");
+                    logger.info("Enter the bride's name: ");
                     String brideName = scanner.next();
 
                     addEvent();
-                    System.out.println("Booking confirmed! Event added successfully.");
+                    logger.info("Booking confirmed! Event added successfully.");
                 } else {
-                    System.out.println("Booking canceled.");
+                	logger.info("Booking canceled.");
                 }
             } else {
-                System.out.println("Invalid choice.");
+            	logger.info("Invalid choice.");
             }
         }
 
@@ -425,39 +427,39 @@ public class EventManagment {
 
     	AddVenue venue = new AddVenue();
 
-    	System.out.println("Enter Venue Name:");
+    	logger.info("Enter Venue Name:");
     	String name = scanner.nextLine();
     	venue.setName(name);
 
-    	System.out.println("Enter Venue Capacity:");
+    	logger.info("Enter Venue Capacity:");
     	int capacity = 0;
     	try {
     	    capacity = Integer.parseInt(scanner.nextLine());
     	} catch (NumberFormatException e) {
-    	    System.out.println("Invalid input for capacity. Please enter an integer.");
+    		logger.info("Invalid input for capacity. Please enter an integer.");
     	    scanner.close();
     	    return; 
     	}
     	venue.setCapacity(capacity);
 
-    	System.out.println("Enter Venue Amenities:");
+    	logger.info("Enter Venue Amenities:");
     	String amenities = scanner.nextLine();
     	venue.setAmenities(amenities);
 
-    	System.out.println("Enter Venue Price:");
+    	logger.info("Enter Venue Price:");
     	int price = 0;
     	try {
     	    price = Integer.parseInt(scanner.nextLine());
     	} catch (NumberFormatException e) {
-    	    System.out.println("Invalid input for price. Please enter an integer.");
+    		logger.info("Invalid input for price. Please enter an integer.");
     	    scanner.close();
     	    return; 
     	}
     	venue.setPrice(price);
 
-    	System.out.println("\nVenue Details:");
+    	logger.info("\nVenue Details:");
     	System.out.println(venue);
-    	System.out.println("The Venue Added Successfully");
+    	logger.info("The Venue Added Successfully");
 
     	scanner.close();
 
@@ -471,10 +473,9 @@ public class EventManagment {
 
         public void printEvents() {
             for (Event event : events) {
-                System.out.println("Event: " + event.title);
-                System.out.println("Date/Time: " + event.dateTime);
-                System.out.println("Description: " + event.description);
-                System.out.println();
+            	logger.info("Event: " + event.title);
+            	logger.info("Date/Time: " + event.dateTime);
+            	logger.info("Description: " + event.description);
             }
         }
         }
@@ -537,7 +538,7 @@ public void  calander2() {
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        System.out.println("Reminder for " + eventName + ": " + taskDescription);
+                    	logger.info("Reminder for " + eventName + ": " + taskDescription);
                     }
                 }, delay);
             }
@@ -581,13 +582,13 @@ public void  calanderSuperProvider() {
     for (Event1 event : planner.getEvents()) {
         for (Task task : event.getTasks()) {
             long delay = ChronoUnit.MILLIS.between(LocalDateTime.now(), LocalDateTime.of(task.getDueDate(), LocalTime.of(0, 0)));
-            if (delay > 0) {  // Setting reminders only for future tasks
+            if (delay > 0) {  
                 final String eventName = event.toString();
                 final String taskDescription = task.getDescription();
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        System.out.println("Reminder for " + eventName + ": " + taskDescription);
+                    	logger.info("Reminder for " + eventName + ": " + taskDescription);
                     }
                 }, delay);
             }
@@ -595,30 +596,30 @@ public void  calanderSuperProvider() {
     }
   
    
-    System.out.println("Would you like to mark a task as completed? (y/n)");
+    logger.info("Would you like to mark a task as completed? (y/n)");
     String answer = scanner.nextLine();
     if (answer.equalsIgnoreCase("y")) {
-        System.out.println("Enter the task number to mark as completed:");
+    	logger.info("Enter the task number to mark as completed:");
         int taskNumber = scanner.nextInt();
         scanner.nextLine(); 
         if (taskNumber >= 1 && taskNumber <= planner.getEvents().size()) {
             Event1 selectedEvent = planner.getEvents().get(taskNumber - 1);
-            System.out.println("Select the task to mark as completed:");
+            logger.info("Select the task to mark as completed:");
             List<Task> tasks = selectedEvent.getTasks();
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println((i + 1) + ". " + tasks.get(i).getDescription());
+            	logger.info((i + 1) + ". " + tasks.get(i).getDescription());
             }
             int selectedTask = scanner.nextInt();
             scanner.nextLine(); 
             if (selectedTask >= 1 && selectedTask <= tasks.size()) {
                 Task taskToComplete = tasks.get(selectedTask - 1);
                 taskToComplete.markCompleted();
-                System.out.println("Task marked as completed: " + taskToComplete.getDescription());
+                logger.info("Task marked as completed: " + taskToComplete.getDescription());
             } else {
-                System.out.println("Invalid task selection.");
+            	logger.info("Invalid task selection.");
             }
         } else {
-            System.out.println("Invalid event selection.");
+        	logger.info("Invalid event selection.");
         }
     }
 
@@ -674,36 +675,36 @@ public class VenueEditor {
             return;
         }
 
-        System.out.println("Editing venue: " + venueToEdit.getName());
-        System.out.println("Current Capacity: " + venueToEdit.getCapacity());
-        System.out.println("Current Amenities: " + venueToEdit.getAmenities());
-        System.out.println("Current Price: " + venueToEdit.getPrice());
+        logger.info("Editing venue: " + venueToEdit.getName());
+        logger.info("Current Capacity: " + venueToEdit.getCapacity());
+        logger.info("Current Amenities: " + venueToEdit.getAmenities());
+        logger.info("Current Price: " + venueToEdit.getPrice());
 
-        System.out.print("Enter new name (or press Enter to keep the current name): ");
+        logger.info("Enter new name (or press Enter to keep the current name): ");
         String newName = scanner.nextLine();
 
-        System.out.print("Enter new capacity (or press Enter to keep the current capacity): ");
+        logger.info("Enter new capacity (or press Enter to keep the current capacity): ");
         String newCapacityStr = scanner.nextLine();
         int newCapacity = venueToEdit.getCapacity(); 
         if (!newCapacityStr.isEmpty()) {
             try {
                 newCapacity = Integer.parseInt(newCapacityStr);
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input for capacity. Keeping the current value.");
+            	logger.info("Invalid input for capacity. Keeping the current value.");
             }
         }
 
-        System.out.print("Enter new amenities (or press Enter to keep the current amenities): ");
+        logger.info("Enter new amenities (or press Enter to keep the current amenities): ");
         String newAmenities = scanner.nextLine();
 
-        System.out.print("Enter new price (or press Enter to keep the current price): ");
+        logger.info("Enter new price (or press Enter to keep the current price): ");
         String newPriceStr = scanner.nextLine();
         int newPrice = venueToEdit.getPrice(); 
         if (!newPriceStr.isEmpty()) {
             try {
                 newPrice = Integer.parseInt(newPriceStr);
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input for price. Keeping the current value.");
+            	logger.info("Invalid input for price. Keeping the current value.");
             }
         }
 
@@ -717,7 +718,7 @@ public class VenueEditor {
         venueToEdit.setPrice(newPrice);
 
         resultMessage = "Venue edited successfully:\n" + venueToEdit.toString();
-        System.out.println("Updated Venue Details:");
+        logger.info("Updated Venue Details:");
         System.out.println(venueToEdit);
     }
 
@@ -753,9 +754,9 @@ public static String deleteVenue(String venueName) {
 }
 public static String deleteVenue(List<DeleteVenue> venuesList) {
     Scanner scanner = new Scanner(System.in);
-    System.out.println("Available Venues:");
+    logger.info("Available Venues:");
     for (DeleteVenue venue : venuesList) {
-        System.out.println("- " + venue.getName());
+    	logger.info("- " + venue.getName());
     }
 
     System.out.print("Enter the name of the venue you want to delete: ");
@@ -775,7 +776,7 @@ public void deleteVenue() {
       venuesList.add(new DeleteVenue("Venue 2", 200, "Amenities 2", 1000));
 
       String result = deleteVenue(venuesList);
-      System.out.println(result);
+      logger.info(result);
 
       System.out.println("Remaining Venues:");
       for (DeleteVenue venue : venuesList) {
@@ -785,13 +786,13 @@ public void deleteVenue() {
 public void Photo() {
 	Scanner scanner = new Scanner(System.in);
 
-    System.out.println("Welcome to the File Uploader");
-    System.out.println("Please enter the path of the file you want to upload:");
+	logger.info("Welcome to the File Uploader");
+	logger.info("Please enter the path of the file you want to upload:");
     String filePath = scanner.nextLine();
 
     File file = new File(filePath);
     if (!file.exists() || !file.isFile()) {
-        System.out.println("Invalid file path. Please provide a valid path to a file.");
+    	logger.info("Invalid file path. Please provide a valid path to a file.");
         return;
     }
 
@@ -805,9 +806,9 @@ public void Photo() {
 
         Files.copy(Paths.get(filePath), Paths.get(destinationFolder + file.getName()), StandardCopyOption.REPLACE_EXISTING);
 
-        System.out.println("File uploaded successfully to: " + destinationFolder + file.getName());
+        logger.info("File uploaded successfully to: " + destinationFolder + file.getName());
     } catch (Exception e) {
-        System.out.println("An error occurred during file upload: " + e.getMessage());
+    	 logger.info("An error occurred during file upload: " + e.getMessage());
     } finally {
         scanner.close();
     }
