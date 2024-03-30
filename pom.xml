@@ -4,6 +4,10 @@
   <artifactId>WeddingPlannerProject</artifactId>
   <version>0.0.1-SNAPSHOT</version>
    <!-- https://mvnrepository.com/artifact/junit/junit -->
+   <properties>
+  <sonar.organization>amanisiwarproject1</sonar.organization>
+  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+</properties>
   <dependencies>
 <dependency>
     <groupId>junit</groupId>
