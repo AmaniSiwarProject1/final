@@ -21,7 +21,6 @@ public class EditEvent {
         this.phone = phone;
     }
 
-    // Getters and Setters
     public String getBrideName() {
         return brideName;
     }
@@ -86,7 +85,6 @@ public class EditEvent {
         this.phone = phone;
     }
 
-    // Method to display event details
     public void displayEventDetails() {
         System.out.println("Event Details:");
         System.out.println("Bride Name: " + brideName);

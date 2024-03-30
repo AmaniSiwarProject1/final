@@ -191,7 +191,7 @@ public class EventManagment {
 
    
     public void updateEvent(List<AddEvent> eventsListt) {
-        Scanner scanner = new Scanner(System.in); // تعريف متغير scanner
+        Scanner scanner = new Scanner(System.in);
 
     	   System.out.println("Enter the date of the event you want to update (yyyy-MM-dd): ");
            String eventDate = scanner.nextLine();
@@ -335,10 +335,8 @@ public class EventManagment {
         venues.add(new Venue("Sunset Venue",  1000.0, "2024-04-01","5:30"));
         venues.add(new Venue("Light Venue",  800.0, "2024-04-01","10:20"));
 
-        // Create a VenueFinder object
         VenueFinder venueFinder = new VenueFinder();
 
-        // Get user input for max price and wedding date
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the maximum price you can pay: ");
         double maxPrice = scanner.nextDouble();
@@ -347,7 +345,6 @@ public class EventManagment {
         String weddingDate = "";
       
 
-        // Validate the wedding date format
         boolean validDate = false;
         while (!validDate) {
             weddingDate = scanner.next();
@@ -369,10 +366,8 @@ public class EventManagment {
             }
         }
 
-        // Find matching venues
         List<Venue> matchingVenues = venueFinder.findMatchingVenues(venues, maxPrice, weddingDate,weddingTime);
 
-        // Display matching venues
         if (matchingVenues.isEmpty()) {
             System.out.println("No venues found matching the criteria.");
         } else {
@@ -403,7 +398,6 @@ public class EventManagment {
                     System.out.print("Enter the bride's name: ");
                     String brideName = scanner.next();
 
-                    // Call addEvent function to finalize booking
                     addEvent();
                     System.out.println("Booking confirmed! Event added successfully.");
                 } else {
@@ -442,7 +436,7 @@ public class EventManagment {
     	} catch (NumberFormatException e) {
     	    System.out.println("Invalid input for capacity. Please enter an integer.");
     	    scanner.close();
-    	    return; // Exit the method
+    	    return; 
     	}
     	venue.setCapacity(capacity);
 
@@ -457,7 +451,7 @@ public class EventManagment {
     	} catch (NumberFormatException e) {
     	    System.out.println("Invalid input for price. Please enter an integer.");
     	    scanner.close();
-    	    return; // Exit the method
+    	    return; 
     	}
     	venue.setPrice(price);
 
@@ -468,7 +462,6 @@ public class EventManagment {
     	scanner.close();
 
     }
-//////////////////////////اارخص مكان بالعالم كله جديد
     class Calendar {
         List<Event> events = new ArrayList<>();
 
@@ -496,17 +489,14 @@ public class EventManagment {
             this.description = description;
         }
 
-        // Getters and setters (omitted for brevity)
     }
 
     public void Calander1() {
 Calendar weddingCalendar = new Calendar();
         
-        // Adding some events
         weddingCalendar.addEvent(new Event(LocalDateTime.of(2024, 5, 20, 15, 30), "Cake Tasting", "Tasting different cakes to select the perfect one for the wedding."));
         weddingCalendar.addEvent(new Event(LocalDateTime.of(2024, 6, 10, 10, 0), "Dress Fitting", "Final fitting for the wedding dress."));
 
-        // Printing the events
         weddingCalendar.printEvents();
     }
     public int getEventsCount() {
@@ -524,7 +514,6 @@ public void  calander2() {
     for (AddEvent addEvent : newEventsList) {
         Event1 event = new Event1(addEvent.getBrideName() + " and " + addEvent.getGroomName() + "'s Wedding", LocalDate.parse(addEvent.getDate()));
 
-        // Adding Tasks to the Event
         Task bookVenueTask = new Task("Book venue at " + addEvent.getVenue(), LocalDate.parse(addEvent.getDate()));
         Task hireCatererTask = new Task("Hire caterer for the event", LocalDate.parse(addEvent.getDate()));
         Task sendInvitationsTask = new Task("Send invitations to guests", LocalDate.parse(addEvent.getDate()));
@@ -536,15 +525,13 @@ public void  calander2() {
         planner.addEvent(event);
     }
 
-    // Displaying all events and tasks
     planner.displayAllEvents();
 
-    // Setting reminders for tasks
     Timer timer = new Timer();
     for (Event1 event : planner.getEvents()) {
         for (Task task : event.getTasks()) {
             long delay = ChronoUnit.MILLIS.between(LocalDateTime.now(), LocalDateTime.of(task.getDueDate(), LocalTime.of(0, 0)));
-            if (delay > 0) {  // Setting reminders only for future tasks
+            if (delay > 0) {  
                 final String eventName = event.toString();
                 final String taskDescription = task.getDescription();
                 timer.schedule(new TimerTask() {
@@ -577,7 +564,6 @@ public void  calanderSuperProvider() {
     for (AddEvent addEvent : newEventsList) {
         Event1 event = new Event1(addEvent.getBrideName() + " and " + addEvent.getGroomName() + "'s Wedding", LocalDate.parse(addEvent.getDate()));
 
-        // Adding Tasks to the Event
         Task BookFlower  = new Task("Book Flower " + addEvent.getVenue(), LocalDate.parse(addEvent.getDate()));
         Task Providefood = new Task("Provide food", LocalDate.parse(addEvent.getDate()));
 
@@ -589,10 +575,8 @@ public void  calanderSuperProvider() {
         planner.addEvent(event);
     }
 
-    // Displaying all events and tasks
     planner.displayAllEvents();
 
-    // Setting reminders for tasks
     Timer timer = new Timer();
     for (Event1 event : planner.getEvents()) {
         for (Task task : event.getTasks()) {
@@ -616,8 +600,7 @@ public void  calanderSuperProvider() {
     if (answer.equalsIgnoreCase("y")) {
         System.out.println("Enter the task number to mark as completed:");
         int taskNumber = scanner.nextInt();
-        scanner.nextLine(); // Consume newline left by nextInt()
-
+        scanner.nextLine(); 
         if (taskNumber >= 1 && taskNumber <= planner.getEvents().size()) {
             Event1 selectedEvent = planner.getEvents().get(taskNumber - 1);
             System.out.println("Select the task to mark as completed:");
@@ -626,8 +609,7 @@ public void  calanderSuperProvider() {
                 System.out.println((i + 1) + ". " + tasks.get(i).getDescription());
             }
             int selectedTask = scanner.nextInt();
-            scanner.nextLine(); // Consume newline left by nextInt()
-
+            scanner.nextLine(); 
             if (selectedTask >= 1 && selectedTask <= tasks.size()) {
                 Task taskToComplete = tasks.get(selectedTask - 1);
                 taskToComplete.markCompleted();
@@ -662,7 +644,6 @@ public class VenueEditor {
     public String editVenue(String venueName, String newName, Integer newCapacity, String newAmenities, Integer newPrice) {
         for (EditVenue venue : venues) {
             if (venue.getName().equalsIgnoreCase(venueName)) {
-                // Update venue details as per the provided arguments...
                 return "Venue edited successfully";
             }
         }
@@ -674,7 +655,6 @@ public class VenueEditor {
     public VenueEditor() {
         scanner = new Scanner(System.in);
         venues = new ArrayList<>();
-        // Add some initial venues for testing
         venues.add(new EditVenue("Grand Hall", 500, "Catering, Sound System", 1500));
         venues.add(new EditVenue("Conference Center", 300, "Projector, WiFi", 1000));
         venues.add(new EditVenue("Garden Pavilion", 200, "Outdoor Space, Tables", 800));
@@ -704,7 +684,7 @@ public class VenueEditor {
 
         System.out.print("Enter new capacity (or press Enter to keep the current capacity): ");
         String newCapacityStr = scanner.nextLine();
-        int newCapacity = venueToEdit.getCapacity(); // Default to current value
+        int newCapacity = venueToEdit.getCapacity(); 
         if (!newCapacityStr.isEmpty()) {
             try {
                 newCapacity = Integer.parseInt(newCapacityStr);
@@ -718,7 +698,7 @@ public class VenueEditor {
 
         System.out.print("Enter new price (or press Enter to keep the current price): ");
         String newPriceStr = scanner.nextLine();
-        int newPrice = venueToEdit.getPrice(); // Default to current value
+        int newPrice = venueToEdit.getPrice(); 
         if (!newPriceStr.isEmpty()) {
             try {
                 newPrice = Integer.parseInt(newPriceStr);
@@ -747,7 +727,6 @@ private List<EditVenue> venues = new ArrayList<>();
 public String editVenueDirectly(String venueName, String newName, int newCapacity, String newAmenities, int newPrice) {
     for (EditVenue venue : venues) {
         if (venue.getName().equalsIgnoreCase(venueName)) {
-            // تحديث تفاصيل الأماكن
             venue.setName(newName);
             venue.setCapacity(newCapacity);
             venue.setAmenities(newAmenities);
@@ -757,7 +736,6 @@ public String editVenueDirectly(String venueName, String newName, int newCapacit
     }
     return "Venue '" + venueName + "' not found.";
 
-////////////////////////////////////
 
 
 }
@@ -796,11 +774,9 @@ public void deleteVenue() {
       venuesList.add(new DeleteVenue("Venue 1", 100, "Amenities 1", 500));
       venuesList.add(new DeleteVenue("Venue 2", 200, "Amenities 2", 1000));
 
-      // Delete a venue by name
       String result = deleteVenue(venuesList);
       System.out.println(result);
 
-      // Print remaining venues
       System.out.println("Remaining Venues:");
       for (DeleteVenue venue : venuesList) {
           System.out.println(venue);
@@ -820,16 +796,13 @@ public void Photo() {
     }
 
     try {
-        // Destination folder where the file will be "uploaded"
         String destinationFolder = "uploaded_files/";
 
-        // Create destination directory if it doesn't exist
         File destDir = new File(destinationFolder);
         if (!destDir.exists()) {
             destDir.mkdirs();
         }
 
-        // Copy the file to the destination folder
         Files.copy(Paths.get(filePath), Paths.get(destinationFolder + file.getName()), StandardCopyOption.REPLACE_EXISTING);
 
         System.out.println("File uploaded successfully to: " + destinationFolder + file.getName());

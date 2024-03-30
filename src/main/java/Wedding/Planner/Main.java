@@ -84,7 +84,6 @@ public class Main {
     }
 
     private static void showMenuForSp() {
-        // TODO: Add menu for service provider
     	 EventManagment eventManager1 = new EventManagment();
     	 VenueEditor venueEditor = eventManager.new VenueEditor();
         Scanner scanner = new Scanner(System.in);
@@ -106,7 +105,7 @@ public class Main {
             int choice;
             try {
                 choice = scanner.nextInt();
-                scanner.nextLine(); // Consume the newline character
+                scanner.nextLine(); 
 
                 switch (choice) {
                     case 1:
@@ -146,7 +145,6 @@ public class Main {
                     	 System.out.println("Enter the name of the venue you want to edit: ");
                          String venueNameToEdit = scanner.nextLine();
                          
-                         // استدعاء الدالة editVenue من كائن VenueEditor
                          venueEditor.editVenue(venueNameToEdit);
                          break;                
                          case 8:
@@ -169,7 +167,7 @@ public class Main {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a valid number.");
-                scanner.nextLine(); // Consume the invalid input
+                scanner.nextLine(); 
                 continue;
             }
 
@@ -205,7 +203,7 @@ public class Main {
         int choice;
         try {
             choice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline character
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -251,7 +249,6 @@ public class Main {
                 	 System.out.println("Enter the name of the venue you want to edit: ");
                      String venueNameToEdit = scanner.nextLine();
                      
-                     // استدعاء الدالة editVenue من كائن VenueEditor
                      venueEditor.editVenue(venueNameToEdit);
                      break;                
                      case 11:
@@ -274,7 +271,7 @@ public class Main {
             }
         } catch (InputMismatchException e) {
             System.out.println("Invalid input. Please enter a valid number.");
-            scanner.nextLine(); // Consume the invalid input
+            scanner.nextLine(); 
             continue;
         }
 
@@ -306,10 +303,8 @@ public class Main {
             
             switch (num) {
                 case 1:
-                    // TODO: View Profile
                     break;
                 case 2:
-                    // TODO: Edit Profile
                     break;
                 case 3:
                 	 eventManager1.addEvent();

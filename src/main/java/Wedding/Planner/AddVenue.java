@@ -12,7 +12,6 @@ public class AddVenue {
  
 
 
-    // Constructor
     public AddVenue(String name, int capacity, String amenities, int price) {
         this.name = name;
         this.capacity = capacity;
@@ -20,12 +19,9 @@ public class AddVenue {
         this.price = price;
     }
 
-    // Default Constructor
     public AddVenue() {
-        // Default constructor
     }
 
-    // Getter and Setter for Venue Name
     public String getName() {
         return name;
     }
@@ -34,7 +30,6 @@ public class AddVenue {
         this.name = name;
     }
 
-    // Getter and Setter for Capacity
     public int getCapacity() {
         return capacity;
     }
@@ -43,7 +38,6 @@ public class AddVenue {
         this.capacity = capacity;
     }
 
-    // Getter and Setter for Amenities
     public String getAmenities() {
         return amenities;
     }
@@ -52,7 +46,6 @@ public class AddVenue {
         this.amenities = amenities;
     }
 
-    // Getter and Setter for Price
     public int getPrice() {
         return price;
     }
@@ -61,10 +54,8 @@ public class AddVenue {
         this.price = price;
     }
 
-    // Getter and Setter for Available Date
  
 
-    // toString method to display Venue details
     @Override
     public String toString() {
         return "Venue{" +

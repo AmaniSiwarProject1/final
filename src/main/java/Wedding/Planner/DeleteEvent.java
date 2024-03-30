@@ -26,7 +26,6 @@ public class DeleteEvent {
 
     }
 
-    // Getters and Setters
     public String getDate() {
         return date;
     }

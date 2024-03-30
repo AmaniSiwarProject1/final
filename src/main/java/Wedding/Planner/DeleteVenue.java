@@ -13,12 +13,9 @@ public class DeleteVenue {
         this.price = price;
     }
 
-    // Default constructor
     public DeleteVenue() {
-        // Default constructor
     }
 
-    // Getter and Setter for Venue Name
     public String getName() {
         return name;
     }
@@ -27,7 +24,6 @@ public class DeleteVenue {
         this.name = name;
     }
 
-    // Getter and Setter for Capacity
     public int getCapacity() {
         return capacity;
     }
@@ -36,7 +32,6 @@ public class DeleteVenue {
         this.capacity = capacity;
     }
 
-    // Getter and Setter for Amenities
     public String getAmenities() {
         return amenities;
     }
@@ -45,7 +40,6 @@ public class DeleteVenue {
         this.amenities = amenities;
     }
 
-    // Getter and Setter for Price
     public int getPrice() {
         return price;
     }
@@ -54,7 +48,6 @@ public class DeleteVenue {
         this.price = price;
     }
 
-    // toString method to display Venue details
     @Override
     public String toString() {
         return "Venue{" +

@@ -35,7 +35,6 @@ public class UpdateEvent {
 
     @Then("The system displays a message that the event was not found")
     public void theSystemDisplaysAMessageThatTheEventWasNotFound() {
-        // Here you can implement the logic to check if the event was not found
         List<AddEvent> eventsList = eventManager.getEvents();
         boolean eventFound = false;
 

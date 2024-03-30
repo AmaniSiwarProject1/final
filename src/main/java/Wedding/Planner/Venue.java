@@ -30,7 +30,6 @@ public class Venue {
         return hour;
     }
 
-    // Setters if needed
     
     public void setName(String name) {
         this.name = name;
