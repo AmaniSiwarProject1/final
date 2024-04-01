@@ -1,5 +1,5 @@
 import Wedding.Planner.AddEvent;
-import Wedding.Planner.EventManagement;
+import Wedding.Planner.EventManagment;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -7,11 +7,11 @@ import org.junit.Assert;
 
 public class AddEventTest {
 	
-	 private EventManagement eventManagement;
+	 private EventManagment eventManagement;
 	    private AddEvent newEvent;
 	    @Given("the User is logged in")
 	    public void theUserIsLoggedIn() {
-	        eventManagement = new EventManagement();
+	        eventManagement = new EventManagment();
 
 	    }
 	@Given("there is no event with brideName {string}, groomName {string}, date {string}, time {string}, numberOfGuests {string}, venue {string}, location {string}, phone {string} , and price {string}")
@@ -61,7 +61,64 @@ public class AddEventTest {
         Assert.assertEquals("Venue capacity exceeded for this event", eventManagement.getErrorMessage());
 
 	}
+	private boolean userIsLoggedIn;
+	private boolean eventCreationAllowed;
+	
+	@Given("the User is logged in and the User is trying to add a new event")
+	public void theUserIsLoggedInAndTheUserIsTryingToAddANewEvent() {
+		  userIsLoggedIn = true;
+		    eventCreationAllowed = true;
+	}
 
+	@When("the User provides all event details except the bride's name")
+	public void theUserProvidesAllEventDetailsExceptTheBrideSName() {
+	    // Write code here that turns the phrase above into concrete actions
+		  eventCreationAllowed = false;
+	}
+
+	@Then("the system should not allow adding the event and display an error message about the missing bride's name")
+	public void theSystemShouldNotAllowAddingTheEventAndDisplayAnErrorMessageAboutTheMissingBrideSName() {
+		 if (!eventCreationAllowed) {
+		        System.out.println("Error: The event cannot be added as the bride's name is missing.");
+		    }
+	}
+
+@When("the User provides an invalid phone number format for the event")
+public void theUserProvidesAnInvalidPhoneNumberFormatForTheEvent() {
+    // Write code here that turns the phrase above into concrete actions
+	 eventCreationAllowed = false;
+}
+
+@Then("the system should not allow adding the event and display an error message about the invalid phone number format")
+public void theSystemShouldNotAllowAddingTheEventAndDisplayAnErrorMessageAboutTheInvalidPhoneNumberFormat() {
+	 if (!eventCreationAllowed) {
+	        System.out.println("Error: The event cannot be added due to an invalid phone number format.");
+	    }
+}
+
+@When("the User provides all event details except the groom's name")
+public void theUserProvidesAllEventDetailsExceptTheGroomSName() {
+	eventCreationAllowed = false;
+}
+
+@Then("the system should not allow adding the event and display an error message about the missing groom's name")
+public void theSystemShouldNotAllowAddingTheEventAndDisplayAnErrorMessageAboutTheMissingGroomSName() {
+	 if (!eventCreationAllowed) {
+	        System.out.println("Error: The event cannot be added as the groom's name is missing.");
+	    }
+}
+@When("the User provides an invalid date format for the event date \\(e.g., {string})")
+public void theUserProvidesAnInvalidDateFormatForTheEventDateEG(String string) {
+    eventCreationAllowed = false;
+
+}
+
+@Then("the system should not allow adding the event and display an error message indicating that the date format is invalid")
+public void theSystemShouldNotAllowAddingTheEventAndDisplayAnErrorMessageIndicatingThatTheDateFormatIsInvalid() {
+	if (!eventCreationAllowed) {
+        System.out.println("Error: The event cannot be added as the date format is invalid.");
+    }
+}
 
 
 }

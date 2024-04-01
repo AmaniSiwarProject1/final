@@ -1,8 +1,8 @@
 import static org.junit.Assert.assertTrue;
 
-import Wedding.Planner.Main;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import Wedding.Planner.Main;
 
 public class Login {
 	@When("admin enters email {string} and password {string}")

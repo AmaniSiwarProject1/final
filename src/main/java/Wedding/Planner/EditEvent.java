@@ -1,6 +1,11 @@
 package Wedding.Planner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class EditEvent {
+    private static final Logger logger = Logger.getLogger(EditEvent.class.getName());
+
     private String brideName;
     private String groomName;
     private String date;
@@ -86,14 +91,17 @@ public class EditEvent {
     }
 
     public void displayEventDetails() {
-        System.out.println("Event Details:");
-        System.out.println("Bride Name: " + brideName);
-        System.out.println("Groom Name: " + groomName);
-        System.out.println("Date: " + date);
-        System.out.println("Time: " + time);
-        System.out.println("Number of Guests: " + numberOfGuests);
-        System.out.println("Venue: " + venue);
-        System.out.println("Location: " + location);
-        System.out.println("Phone: " + phone);
+    	if (logger.isLoggable(Level.INFO)) {
+    	    logger.info("Event Details:");
+    	    logger.info(String.format("Bride Name: %s", brideName));
+    	    logger.info(String.format("Groom Name: %s", groomName));
+    	    logger.info(String.format("Date: %s", date));
+    	    logger.info(String.format("Time: %s", time));
+    	    logger.info(String.format("Number of Guests: %d", numberOfGuests));
+    	    logger.info(String.format("Venue: %s", venue));
+    	    logger.info(String.format("Location: %s", location));
+    	    logger.info(String.format("Phone: %s", phone));
+    	}
+
     }
 }

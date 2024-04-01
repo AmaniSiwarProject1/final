@@ -3,14 +3,14 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import Wedding.Planner.EventManagement;
+import Wedding.Planner.EventManagment;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class DeleteVenueTest {
-	private EventManagement eventManagment = new EventManagement();
-    private EventManagement.VenueEditor venueEditor = eventManagment.new VenueEditor();
+	private EventManagment eventManagment = new EventManagment();
+    private EventManagment.VenueEditor venueEditor = eventManagment.new VenueEditor();
     
     private boolean venueExists;
     private boolean deletionConfirmed;
@@ -38,7 +38,7 @@ public class DeleteVenueTest {
 
     @Given("There exists a venue in the venues list")
     public void thereExistsAVenueInTheVenuesList() {
-    	eventManagment = new EventManagement();
+    	eventManagment = new EventManagment();
     }
 
     @When("The user wants to delete a venue and The user provides the venue name")

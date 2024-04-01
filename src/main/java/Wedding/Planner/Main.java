@@ -7,21 +7,22 @@ import java.util.InputMismatchException;
 
 import java.util.List;
 
-import Wedding.Planner.EventManagement.VenueEditor;
+import Wedding.Planner.EventManagment.VenueEditor;
 
 public class Main {
     static List<AddEvent> newEventsList = new ArrayList<>();
+    private static final String SEPARATOR = "--------------------------------";
 
     static String EMAIL1;
     private static final String EMAIL = "Enter your Email please";
     private static final String PASS = "Enter your password please";
     private static String userType = "none";
-    public static ArrayList<Users> UsersList = new ArrayList<>();
+public static final List<Users> USERS_LIST = new ArrayList<>();
     public static ArrayList<Admin> AdminList = new ArrayList<>();
     public static ArrayList<ServiceProvider> ServiceProviderList = new ArrayList<>();
     static Scanner input2 = new Scanner(System.in);
-    public static EventManagement eventManager = new EventManagement();
-    private static final Logger logger = Logger.getLogger(EventManagement.class.getName());
+    public static EventManagment eventManager = new EventManagment();
+    private static final Logger logger = Logger.getLogger(Main.class.getName());
 
     public static void setUserType(String type) {
         userType = type;
@@ -86,7 +87,7 @@ public class Main {
     }
 
     private static void showMenuForSp() {
-    	EventManagement eventManager1 = new EventManagement();
+    	EventManagment eventManager1 = new EventManagment();
     	VenueEditor venueEditor = eventManager.new VenueEditor();
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
@@ -181,7 +182,7 @@ public class Main {
     
 
  private static void showMenuForAd() {
-	 EventManagement eventManager1 = new EventManagement();
+	 EventManagment eventManager1 = new EventManagment();
 	VenueEditor venueEditor = eventManager.new VenueEditor();
     Scanner scanner = new Scanner(System.in);
     boolean running = true;
@@ -282,72 +283,65 @@ public class Main {
 }
 
     private static void showMenuForUser() {
-    	EventManagement eventManager1 = new EventManagement();
+    	EventManagment eventManager1 = new EventManagment();
 
-        boolean running = true;
+    	boolean running = true; // Variable to control the loop
 
-        while (running) {
-        	logger.info("------------------------------------------------");
-        	logger.info("1. View Profile");
-        	logger.info("2. Edit Profile");
-        	logger.info("3. Add Event");     
-        	logger.info("4. Delete Event");  
-        	logger.info("5. Update Event ");
-        	logger.info("6. Add a venue based on your budget");
-        	logger.info("7. Calender");
-        	logger.info("8. Add Photo or Vedio: ");
-        	logger.info("9. Log out");
+    	while (running) {
+        logger.info(SEPARATOR);
+    	    logger.info("1. View Profile");
+    	    logger.info("2. Edit Profile");
+    	    logger.info("3. Add Event");
+    	    logger.info("4. Delete Event");
+    	    logger.info("5. Update Event");
+    	    logger.info("6. Add a venue based on your budget");
+    	    logger.info("7. Calender");
+    	    logger.info("8. Add Photo or Video:");
+    	    logger.info("9. Log out");
+        logger.info(SEPARATOR);
+    	    Scanner scanner = new Scanner(System.in);
+    	    int num = scanner.nextInt(); // corrected variable name
+    	    scanner.nextLine();
 
-        	logger.info("------------------------------------------------");
-            Scanner scanner = new Scanner(System.in);
-            int num = input2.nextInt();
-            input2.nextLine(); 
-            
-            switch (num) {
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                	 eventManager1.addEvent();
-                     break;
-               case 4:
-            	   logger.info("Enter the date of the event you want to delete (yyyy-MM-dd): ");
-                   String eventDate = scanner.nextLine();
-                   logger.info("Enter the time of the event you want to delete (hh:mm a): ");
-                   String eventTime = scanner.nextLine();
-                   eventManager1.deleteEvent(eventDate, eventTime);
-                   break;
-                      
-                case 5:
-                	eventManager1.updateEvent(newEventsList);
-
-                    break;
-
-                case 6:
-                	 eventManager1.Venueadd();
-
-                    break;
-                case 7:
-                	eventManager.calander2();
-                	break;
-                case 8:
-                	 eventManager.Photo();
-                     break;
-                case 9:
-                	logger.info("Thanks for visiting the program.");
-                    System.exit(0);
-                    break;
-
-                default:
-                	logger.info("Invalid input. Please choose a number between 1 and 7.");
-                    break;
-            }
-        }
+    	    switch (num) {
+    	        case 1:
+    	            break;
+    	        case 2:
+    	            break;
+    	        case 3:
+    	            eventManager1.addEvent();
+    	            break;
+    	        case 4:
+    	            logger.info("Enter the date of the event you want to delete (yyyy-MM-dd): ");
+    	            String eventDate = scanner.nextLine();
+    	            logger.info("Enter the time of the event you want to delete (hh:mm a): ");
+    	            String eventTime = scanner.nextLine();
+    	            eventManager1.deleteEvent(eventDate, eventTime);
+    	            break;
+    	        case 5:
+    	            eventManager1.updateEvent(newEventsList);
+    	            break;
+    	        case 6:
+    	            eventManager1.Venueadd();
+    	            break;
+    	        case 7:
+    	            eventManager.calander2();
+    	            break;
+    	        case 8:
+    	            eventManager.Photo();
+    	            break;
+    	        case 9:
+    	            logger.info("Thanks for visiting the program.");
+    	            running = false; // Set the variable to false to exit the loop
+    	            break;
+    	        default:
+    	            logger.info("Invalid input. Please choose a number between 1 and 7.");
+    	            break;
+    	    }
+    	}
     }
-
     public static String login(String email, String password) {
-        for (Users user : UsersList) {
+        for (Users user : USERS_LIST) {
             if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
                 setUserType("User");
                 return "User";
@@ -372,14 +366,14 @@ public class Main {
     }
 
     public static boolean signUp(Users user) {
-        UsersList.add(user);
-        System.out.println("Done! You are now registered. Please log in.");
+        USERS_LIST.add(user);
+       logger.info("Done! You are now registered. Please log in.");
         return true;
     }
 
     public static void main(String[] args) {
         Users user1 = new Users("John Doe", "a@gmail.com", "password123");
-        UsersList.add(user1);
+      USERS_LIST.add(user1);
 
         Admin admin1 = new Admin("Jane Doe", "si@example.com", "password456");
         AdminList.add(admin1);
@@ -395,11 +389,11 @@ public class Main {
 
         
 
-        logger.info("------------------------------------------------");
+        logger.info(SEPARATOR);
         logger.info("1. Sign Up");
         logger.info("2. Log in");
         logger.info("3. Exit the program");
-        logger.info("------------------------------------------------");
+        logger.info(SEPARATOR);
 
         int num = input2.nextInt();
         if (num == 1) {

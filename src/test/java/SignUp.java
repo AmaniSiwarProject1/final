@@ -1,10 +1,10 @@
 import static org.junit.Assert.assertTrue;
 
-import Wedding.Planner.Main;
-import Wedding.Planner.Users;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import Wedding.Planner.Main;
+import Wedding.Planner.Users;
 
 public class SignUp {
 	@Given("infomation about user.")
